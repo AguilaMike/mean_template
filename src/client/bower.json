@@ -1,0 +1,25 @@
+{
+  "name": "template",
+  "main": "static/_comun/app.js",
+  "version": "0.0.0",
+  "authors": [
+    "Ágora Binaria <info@agorabinaria.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.0",
+    "angular-resource": "1.4.0",
+    "angular-animate": "~1.4.1",
+    "angular-messages": "~1.4.1",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.4",
+    "angular-cookies": "~1.4.1"
+  },
+  "resolutions": {
+    "angular": "1.4.0"
+  }
+}

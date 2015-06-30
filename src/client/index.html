@@ -1,0 +1,47 @@
+<html ng-app="template">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+        <meta content="!" name="fragment">
+        <base href="/">
+        <title>MEAN template</title>
+        <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link href="/assests/paper.min.css" rel="stylesheet"> -->
+        <link href="https://bootswatch.com/paper/bootstrap.min.css" rel="stylesheet">
+
+    </head>
+    <body>
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="menuCtrl as menu">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav navbar-nav">
+					          <li ng-class="{ active: menu.isActive('dashboard') }">
+                        <a ui-sref="dashboard">Dashboard</a>
+                    </li>
+                    <li ng-class="{ active: menu.isActive('login') }">
+                        <a ui-sref="login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <main class="container" style="padding-top:50px;" ui-view></main>
+
+        <script src="/bower_components/angular/angular.min.js"></script>
+        <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="/bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+        <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+        <script src="app/_common/app.js"></script>
+        <script src="app/_common/states.js"></script>
+        <script src="app/_common/security.js"></script>
+        <script src="app/_common/menuCtrl.js"></script>
+
+          <script src="app/states/dashboard/dashboardCtrl.js"></script>
+          <script src="app/states/user/loginCtrl.js"></script>
+    </body>
+</html>
