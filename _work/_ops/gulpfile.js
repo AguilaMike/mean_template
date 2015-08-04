@@ -17,6 +17,7 @@ var assets = client + 'assets/';
 var index = client + 'index.html';
 var dist = 'dist/';
 var distClient = dist + 'client/';
+var distApp = distClient + 'app/';
 var distAssets = distClient + 'assets/';
 var distServer = dist + 'server/';
 var distServerConfig = distServer + 'lib/';
@@ -44,7 +45,7 @@ gulp.task('move-html', function () {
     };
     return gulp.src(app + '/**/*.html')
         .pipe(minifyHTML(opts))
-        .pipe(gulp.dest(distClient));
+        .pipe(gulp.dest(distApp));
 });
 
 gulp.task('move-assets', function () {
