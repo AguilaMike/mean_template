@@ -38,7 +38,7 @@ exports.expressLog = function expressLog(app) {
 
 exports.useStaticFiles = function staticFiles(app, express) {
     var static_options = {
-        maxAge: '7d',
+        maxAge: '1d',
         setHeaders: function (res, path, stat) {
             res.set('x-timestamp', Date.now());
         }

@@ -12,7 +12,7 @@ exports.configApp = function() {
     if (settings.cacheMode == "debug") {
         middleware.expressLog(app);
     }
-    middleware.compression(app);
+    middleware.useCompression(app);
     middleware.uploads(app);
     if (settings.cacheMode == "debug") {
         middleware.useStaticFiles(app, express);
