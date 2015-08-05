@@ -41,7 +41,7 @@ exports.getFile = function (req, res, urlRedirect) {
 			metrics.count("cache.use: " + key);
 			sendResponse(err, result, res, mimeType, day);
 		}
-	);
+		);
 };
 
 exports.getJsonApi = function (req, res) {
@@ -55,7 +55,7 @@ exports.getJsonApi = function (req, res) {
 			metrics.count("cache.use: " + key);
 			sendResponse(err, result, res, 'application/json', hour);
 		}
-	);
+		);
 };
 
 

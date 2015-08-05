@@ -6,11 +6,11 @@ var logger = require('./logger.js');
 var securityData = require('./data/security-data.js');
 
 exports.useCompression = function (app) {
-   app.use(compression());
+    app.use(compression());
 };
 
 exports.uploads = function (app) {
-   app.use(multer({inMemory:true,limits: { fieldNameSize: 100, files: 1}}));
+    app.use(multer({ inMemory: true, limits: { fieldNameSize: 100, files: 1 } }));
 };
 
 exports.expressLog = function expressLog(app) {
@@ -43,7 +43,7 @@ exports.useStaticFiles = function staticFiles(app, express) {
             res.set('x-timestamp', Date.now());
         }
     };
-            logger.debug("using useStaticFiles");
+    logger.debug("using useStaticFiles");
     app.use(express.static(__dirname + './../../client', static_options));
 }
 

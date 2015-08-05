@@ -9,14 +9,14 @@ module.exports.staticCache = function (app) {
     });
 
 }
-module.exports.apiRoutes = function(app){
-  app.get('/*', function (req, res, next) {
-          var url = req.url;
-          if ((url.indexOf("app/") >= 0) || url.indexOf("api/") >= 0) {
-              next();
-          } else {
-              //metrics.count("homePage-Revisited");
-              cache.getFile(req, res, '/');
-          }
-      });
+module.exports.apiRoutes = function (app) {
+    app.get('/*', function (req, res, next) {
+        var url = req.url;
+        if ((url.indexOf("app/") >= 0) || url.indexOf("api/") >= 0) {
+            next();
+        } else {
+            //metrics.count("homePage-Revisited");
+            cache.getFile(req, res, '/');
+        }
+    });
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 
-exports.configApp = function() {
+exports.configApp = function () {
     var express = require('express');
     var middleware = require('./middleware.js');
     var api = require('./api/api.js')
