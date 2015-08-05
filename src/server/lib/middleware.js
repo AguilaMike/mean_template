@@ -5,6 +5,7 @@ var multer = require('multer');
 var logger = require('./logger.js');
 var securityData = require('./data/security-data.js');
 
+/** Use the compression middleware to gzip files sent to the client */
 exports.useCompression = function (app) {
     app.use(compression());
 };
@@ -43,7 +44,7 @@ exports.useStaticFiles = function staticFiles(app, express) {
             res.set('x-timestamp', Date.now());
         }
     };
-    logger.debug("using useStaticFiles");
+    logger.debug("using useStaticFiles");   
     app.use(express.static(__dirname + './../../client', static_options));
 }
 
