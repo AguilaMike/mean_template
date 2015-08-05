@@ -5,7 +5,7 @@ var multer = require('multer');
 var logger = require('./logger.js');
 var securityData = require('./data/security-data.js');
 
-exports.compression = function (app) {
+exports.useCompression = function (app) {
    app.use(compression());
 };
 
