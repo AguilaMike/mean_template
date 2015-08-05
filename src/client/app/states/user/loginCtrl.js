@@ -2,7 +2,7 @@
 (function () {
     function loginCtrl() {
         var vm = this;
-        vm.title = "the controller";
+        vm.title = "the login controller";
       }
         angular
         .module('template')
