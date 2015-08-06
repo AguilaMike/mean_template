@@ -2,9 +2,15 @@
 (function () {
     function loginCtrl() {
         var vm = this;
-        vm.title = "the controller";
-      }
-        angular
+
+        vm.submit = function (form) {
+            form.$submitted = true;
+            if (form.$valid) {
+                console.log("do something");
+            }
+        }
+    }
+    angular
         .module('template')
         .controller("loginCtrl", loginCtrl);
 })();
