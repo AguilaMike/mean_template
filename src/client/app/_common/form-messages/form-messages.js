@@ -1,5 +1,8 @@
+"use strict";
 (function () {
-    "use strict";
+    angular
+        .module("formMessages", ['ngMessages'])
+        .directive("formMessages", directive)
 
     function directive() {
         return {
@@ -8,9 +11,6 @@
                 field: "="
             }
         };
-    };
-    angular
-        .module("template")
-        .directive("formMessages", directive)
+    }
 
-}());
+})();

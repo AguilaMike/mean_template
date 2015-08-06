@@ -1,21 +1,21 @@
 "use strict";
 (function () {
     angular
-        .module('login', ['ui.router', 'formMessages'])
+        .module('register', ['ui.router'])
         .config(config)
-        .directive('login', directive)
+        .directive('register', directive)
 
     function config($stateProvider) {
         $stateProvider
-            .state('login', {
-                url: '/login',
-                template: '<login></login>'
+            .state('register', {
+                url: '/register',
+                template: '<register></register>'
             });
     }
 
     function directive() {
         return {
-            templateUrl: 'app/components/login/login.html',
+            templateUrl: 'app/components/register/register.html',
             controller: controller,
             controllerAs: "vm",
             bindToController: true
