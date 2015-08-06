@@ -10,6 +10,10 @@ module.exports.staticFileRoutes = function (app) {
     app.get('/app/*', function (req, res, next) {
         cache.getFile(req, res);
     });
+    /** routes for client side static files */
+    app.get('/bower_components/*', function (req, res, next) {
+        cache.getFile(req, res);
+    });
 
 }
 
@@ -17,10 +21,10 @@ module.exports.staticFileRoutes = function (app) {
 module.exports.apiRoutes = function (app) {
     // TODO: declare routes and bind to data or service methods
     app.get('/api/roles', function (req, res, next) {
-    
+
     });
     app.get('/api/users', function (req, res, next) {
-    
+
     });
 }
 

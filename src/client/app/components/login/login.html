@@ -2,19 +2,19 @@
     <h1>Login</h1>
     <form name="form" novalidate>
         <div class="row">
-            <div class="form-group col-md-4 ng-class:{'has-error': (form.$submitted || form.email.$touched) && form.email.$invalid}">
+            <div class="form-group col-md-4 ng-class:{'has-error': vm.has_error(form,form.email)}">
                 <label for="email">Email address</label>
                 <input type="email" name="email" ng-model="vm.form.email" class="form-control" placeholder="Email" required>
-                <div class="help-block has-error" ng-if="(form.$submitted || form.email.$touched) && form.email.$invalid">
+                <div class="help-block has-error" ng-if="vm.has_error(form,form.email)">
                     <form-messages field="form.email"></form-messages>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4 ng-class:{'has-error': (form.$submitted || form.password.$touched) && form.password.$invalid}">
+            <div class="form-group col-md-4 ng-class:{'has-error': vm.has_error(form, form.password)}">
                 <label for="password">Password</label>
                 <input type="password" name="password" ng-model="vm.form.password" class="form-control" placeholder="Password" required>
-                <div class="help-block has-error" ng-if="(form.$submitted || form.password.$touched) && form.password.$invalid">
+                <div class="help-block has-error" ng-if="vm.has_error(form, form.password)">
                     <form-messages field="form.password"></form-messages>
                 </div>
             </div>
