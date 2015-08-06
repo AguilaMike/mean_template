@@ -1,34 +1,34 @@
 var cache = require('../cache.js');
 
-var logger = require('../logger.js');
-
-
-
-module.exports.staticCache = function (app) {
+/** routing for files fetched from fs */
+module.exports.staticFileRoutes = function (app) {
+    /** base route for index.html */
     app.get('/', function (req, res, next) {
         cache.getFile(req, res);
     });
-
-    app.get('/static/*', function (req, res, next) {
+    /** routes for client side static files */
+    app.get('/app/*', function (req, res, next) {
         cache.getFile(req, res);
     });
 
 }
+
+/** routing for api calls */
 module.exports.apiRoutes = function (app) {
+    // TODO: declare routes and bind to data or service methods
     app.get('/api/roles', function (req, res, next) {
     
     });
     app.get('/api/users', function (req, res, next) {
     
     });
-    
+}
+
+/** non controlled routes */
+module.exports.otherRoutes = function (app) {
     app.get('/*', function (req, res, next) {
-        var url = req.url;
-        if ((url.indexOf("app/") >= 0) || url.indexOf("api/") >= 0) {
-            next();
-        } else {
-            //metrics.count("homePage-Revisited");
-            cache.getFile(req, res, '/');
-        }
+        // redirect everything else to index.html
+        // TODO: control if it should respond with a 404
+        cache.getFile(req, res, '/');
     });
 }

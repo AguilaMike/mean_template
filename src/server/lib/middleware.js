@@ -1,24 +1,17 @@
 var morgan = require('morgan');
-var bodyParser = require('body-parser');
+var logger = require('./logger.js');
+var cache = require('./cache.js');
 var compression = require('compression');
 var multer = require('multer');
-var logger = require('./logger.js');
+var bodyParser = require('body-parser');
 var securityData = require('./data/security-data.js');
 
-/** Use the compression middleware to gzip files sent to the client */
-exports.useCompression = function (app) {
-    app.use(compression());
-};
-
-exports.uploads = function (app) {
-    app.use(multer({ inMemory: true, limits: { fieldNameSize: 100, files: 1 } }));
-};
-
-exports.expressLog = function expressLog(app) {
+/** configures a the logging system */
+exports.useExpressLog = function expressLog(app) {
     var jsonLog = '{"url": ":url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
     app.use(morgan(jsonLog, {
         "skip": function (req, res) {
-            return res.statusCode == 304
+            return res.statusCode < 400
         },
         "stream": logger.morgan_stream
     }));
@@ -34,31 +27,29 @@ exports.expressLog = function expressLog(app) {
         }
     }
 };
-
-
-
-exports.useStaticFiles = function staticFiles(app, express) {
-    var static_options = {
-        maxAge: '1d',
-        setHeaders: function (res, path, stat) {
-            res.set('x-timestamp', Date.now());
-        }
-    };
-    logger.debug("using useStaticFiles");   
-    app.use(express.static(__dirname + './../../client', static_options));
-}
-
+/** intitializes cache */
+exports.useCache = function (app) {
+    cache.initCache();
+};
+/** uses the compression middleware to gzip files sent to the client */
+exports.useCompression = function (app) {
+    app.use(compression());
+};
+/** uses an uploader to receive files by post */
+exports.useUploader = function uploader(app) {
+    app.use(multer({ inMemory: true, limits: { fieldNameSize: 100, files: 1 } }));
+};
+/** parses body and urls to get JSON objects */
 exports.useBodyParser = function useBodyParser(app) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
     app.use(bodyParser.json());
 }
-
-
+/** configures the security system for protected routes */
 exports.useSecurity = function name(app) {
     app.use('/api/priv/', function (req, res, next) {
-        // JWT
+        // TODO: JWT
         next();
     });
 }
