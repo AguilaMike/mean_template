@@ -14,7 +14,6 @@ module.exports.staticFileRoutes = function (app) {
     app.get('/bower_components/*', function (req, res, next) {
         cache.getFile(req, res);
     });
-
 }
 
 /** routing for api calls */

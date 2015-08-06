@@ -15,7 +15,7 @@ var mongoDb = {
 	collection: 'logs',
 	storeHost: true
 };
-
+/** configures the loggins system */
 module.exports = config();
 
 
@@ -31,12 +31,15 @@ function config() {
 	}
 	return logger;
 };
-
+/** an input stream that receives events from morgan and sends them to winston  */
 module.exports.morgan_stream = {
 	write: function (message, encoding) {
+		// removes the new line last char
 		var morgan = message.slice(0, -1);
 		try {
+			// tries to get a JSON objet from the preformated string 
 			var meta = JSON.parse(morgan);
+			// parses the count of bytes if its present
 			if (meta.cnt == "-") {
 				meta.cnt = 0;
 			} else {
