@@ -4,9 +4,9 @@
         $httpProvider.interceptors.push(securityInterceptor);
     }
 
-    function securityInterceptor($injector,$q, $cookieStore, $rootScope) {
+    function securityInterceptor($injector,$q,  $rootScope) {
         function requestInterceptor (request) {
-            request.headers["sessionId"] = $cookieStore.get("sessionId");
+
             return request || $q.when(request);
         };
         function responseErrorInterceptor(response) {

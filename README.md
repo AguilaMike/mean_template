@@ -1,15 +1,15 @@
 # mean_template
 
-Template project to create applications with AngularJS, NodeJS, Express and MongoDB. 
+Template project to create applications with **AngularJS**, **NodeJS**, **Express** and **MongoDB**. 
 
 
-Based on ES5
+Based on JavaScript ES5
 
 Tecnologies used:
 ##Client side:
-Use npm for client libraries
+*To Do: Use npm for client libraries*
 
-### AngularJS 1.4
+### AngularJS 1.4.x
 - ngResource
 - ngMessages
 - ngAnimate
@@ -20,3 +20,16 @@ Use npm for client libraries
 - ngStorage
 - gettext ??? angular-translate ???
 - module loader ??? webpack ????
+
+
+##Server side:
+
+### NodeJS 0.12.x
+- express
+- mongodb
+- winston
+- morgan
+- body-parser
+- cache-manager
+- multer
+- compression
