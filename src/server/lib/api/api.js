@@ -11,7 +11,7 @@ module.exports.staticFileRoutes = function (app) {
         cache.getFile(req, res);
     });
     /** routes for client side static files */
-    app.get('/bower_components/*', function (req, res, next) {
+    app.get('/node_modules/*', function (req, res, next) {
         cache.getFile(req, res);
     });
 }

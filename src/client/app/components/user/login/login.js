@@ -15,7 +15,7 @@
 
     function directive() {
         return {
-            templateUrl: 'app/components/login/login.html',
+            templateUrl: 'app/components/user/login/login.html',
             controller: controller,
             controllerAs: "vm",
             bindToController: true

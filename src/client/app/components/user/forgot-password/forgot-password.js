@@ -1,21 +1,21 @@
 "use strict";
 (function () {
     angular
-        .module('register', ['ui.router', 'formMessages'])
+        .module('forgotPassword', ['ui.router', 'formMessages'])
         .config(config)
-        .directive('register', directive)
+        .directive('forgotPassword', directive)
 
     function config($stateProvider) {
         $stateProvider
-            .state('register', {
-                url: '/register',
-                template: '<register></register>'
+            .state('forgotPassword', {
+                url: '/forgot-password',
+                template: '<forgot-password></forgot-password>'
             });
     }
 
     function directive() {
         return {
-            templateUrl: 'app/components/register/register.html',
+            templateUrl: 'app/components/user/forgot-password/forgot-password.html',
             controller: controller,
             controllerAs: "vm",
             bindToController: true

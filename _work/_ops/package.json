@@ -5,7 +5,7 @@
     "author": "Agora Binaria",
     "license": "ISC",
     "scripts": {
-        "prestart": "npm install && cd ../../src/client && bower install",
+        "prestart": "npm install && cd ../../src/client && npm install",
         "start": "gulp build-dist && cd dist/server && npm install --production"
     },
     "devDependencies": {
