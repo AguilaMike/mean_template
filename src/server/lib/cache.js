@@ -84,8 +84,14 @@ exports.getJsonApi = function (req, res) {
 /** utility to send a common response */
 function sendResponse(err, result, res, content_type, max_age) {
 	if (err) {
-		logger.error(err);
-		res.status(500).send(err);
+		if (err.code ==='ENOENT') {
+			logger.warn('Not Found: ' + err.path);
+			res.status(404).send(err);
+		}
+		else {
+			logger.error(err);
+			res.status(500).send(err);
+		}
 	} else {
 		res.set('x-timestamp', Date.now());
 		res.set('content-type', content_type);
