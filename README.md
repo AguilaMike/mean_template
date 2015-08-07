@@ -7,7 +7,6 @@ Based on JavaScript ES5
 
 Tecnologies used:
 ##Client side:
-*To Do: Use npm for client libraries*
 
 ### AngularJS 1.4.x
 - ngResource
