@@ -4,9 +4,14 @@
 exports.createApp = function () {
     var express = require('express');
     var middleware = require('./middleware.js');
-    var api = require('./api/api.js')
+    var staticFiles = require('./routes/staticFiles.js')
+    var api = require('./routes/api.js')
+    var other = require('./routes/other.js')
+    
+    // creataing the express application
     var app = express();
     
+    // middleware configuration
     middleware.useExpressLog(app);
     middleware.useCache(app);
     middleware.useCompression(app);
@@ -14,9 +19,10 @@ exports.createApp = function () {
     middleware.useBodyParser(app);
     middleware.useSecurity(app);
     
-    api.staticFileRoutes(app);
+    // routes
+    staticFiles.staticFileRoutes(app);
     api.apiRoutes(app);
-    api.otherRoutes(app);
+    other.otherRoutes(app);
     
     return app;
 };
