@@ -9,19 +9,13 @@
             </div>
         </form>
     </div>
-    <div class="row">
-        <h2>Form data</h2>
-        <pre>{{vm.model | json}}</pre>
-    </div>
-    <div class="row">
-        <h2>Form</h2>
-        <pre>{{vm.form | json}}</pre>
-    </div>
 </div>
 
 <script type="text/ng-template" id="custom.html">
-    <div class="form-group col-md-4 row">
-        <label for="{{::id}}">{{options.templateOptions.label}}</label>
-        <input id="{{::id}}" name="{{::id}}" class="form-control" ng-model="model[options.key]" />
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="{{::id}}">{{options.templateOptions.label}}</label>
+            <input id="{{::id}}" name="{{::id}}" class="form-control" ng-model="model[options.key]" />
+        </div>
     </div>
 </script>
