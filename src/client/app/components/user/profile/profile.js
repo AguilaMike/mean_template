@@ -30,16 +30,55 @@
     function controller() {
         var vm = this;
 
-        vm.model = {};
+        vm.model = {
+            url: 'http://'
+        };
         vm.fields = [
             {
-                key: 'text',
-                type: 'custom',
+                key: 'name',
+                type: 'input',
                 templateOptions: {
                     label: 'Name',
-                    placeholder: 'Name'
+                    placeholder: 'Name',
+                    required: true,
+                    type: 'text'
+                }
+            },
+            {
+                key: 'location',
+                type: 'custom',
+                templateOptions: {
+                    label: 'Location',
+                    placeholder: 'Location',
+                    type: 'text'
+                }
+            },
+            {
+                key: 'phone',
+                type: 'input',
+                templateOptions: {
+                    label: 'Phone',
+                    placeholder: 'Phone',
+                    required: true,
+                    minlength: 9,
+                    type: 'tel'
+                }
+            },
+            {
+                key: 'url',
+                type: 'input',
+                templateOptions: {
+                    label: 'URL',
+                    placeholder: 'http://',
+                },
+                validators: {
+                    urlAddress: function (viewValue, modelValue) {
+                        var value = modelValue || viewValue;
+                        return /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi.test(value);
+                    }
                 }
             }
+
         ];
 
         vm.submit = function () {
