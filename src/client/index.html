@@ -7,16 +7,23 @@
     <meta content="!" name="fragment">
     <base href="/">
     <title>MEAN template</title>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="/assests/paper.min.css" rel="stylesheet"> -->
     <link href="https://bootswatch.com/paper/bootstrap.min.css" rel="stylesheet">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- build:css custom.css -->
+    <link rel="stylesheet" href="app/_common/footer/footer.css">
+    <link rel="stylesheet" href="app/_common/main/main.css">
+    <!-- endbuild -->
 
 </head>
 
 <body>
     <navbar></navbar>
 
-    <main class="container" style="padding-top:50px;" ui-view></main>
+    <main-content></main-content>
+
+    <footerbar></footerbar>
 
     <!-- build:js node_modules.js -->
     <script src="node_modules/angular/angular.min.js"></script>
@@ -33,7 +40,9 @@
     <script src="app/_common/app.js"></script>
     <script src="app/_common/states.js"></script>
     <script src="app/_common/security.js"></script>
+    <script src="app/_common/main/main.js"></script>
     <script src="app/_common/navbar/navbar.js"></script>
+    <script src="app/_common/footer/footer.js"></script>
     <script src="app/_common/form-messages/form-messages.js"></script>
     <!-- endbuild -->
 
