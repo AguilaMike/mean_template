@@ -1,8 +1,8 @@
 {
-  "name": "template",
+  "name": "ciclismean",
   "version": "1.0.0",
-  "description": "Server project",
-  "main": "template.js",
+  "description": "ciclismean ciclismania",
+  "main": "ciclismean.js",
   "author": "Agora Binaria",
   "license": "ISC",
   "dependencies": {
