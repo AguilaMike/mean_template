@@ -3,15 +3,15 @@ var logger = require('../logger.js');
 
 var colName = 'riders';
 
-exports.find = function (query) {
-    var _query = {};
-    var skip = query.skip;
-    var limit = query.limit;
-    var sort = {
+exports.find = function (mongoQuery) {
+    logger.debug("mongoQuery: " + JSON.stringify(mongoQuery));
+    
+    if(!mongoQuery.sort){
+        mongoQuery.sort = {
         total_victories: -1,
-        name: 1
-    };
-    return mongodb.finding(colName, _query, null, skip, limit, sort);
+        name: 1}
+    }
+    return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 }
 
 
