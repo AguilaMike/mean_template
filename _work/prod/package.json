@@ -6,7 +6,7 @@
     "license": "ISC",
     "scripts": {
         "prestart": "npm install && cd ../../src/client && npm install",
-        "start": "gulp build-dist && cd dist/server && npm install --production"
+        "start": "gulp build-dist && cd dist/server && npm install --production && node template.js"
     },
     "devDependencies": {
         "del": "^1.2.0",
