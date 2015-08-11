@@ -11,7 +11,7 @@ exports.useExpressLog = function expressLog(app) {
     var jsonLog = '{"url": ":url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
     app.use(morgan(jsonLog, {
         "skip": function (req, res) {
-            return res.statusCode < 400
+            return res.statusCode < 100
         },
         "stream": logger.morgan_stream
     }));

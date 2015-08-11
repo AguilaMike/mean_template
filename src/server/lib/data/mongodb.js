@@ -26,20 +26,23 @@ function connecting() {
     return deferred.promise;
 }
 
-function finding(colName, query, projection) {
+function finding(colName, query, proj, skip, limit, sort) {
+	var _skip = skip || 0;
+	var _limit = limit || 1000;
+	var _sort = sort || { _id: -1 };
 	var deferred = Q.defer();
 	connecting()
 		.then(function (db) {
-			if(projection){
-			db.collection(colName).find(query, projection).toArray(function (err, result) {
-				callback2Promise(err, result, deferred);
-			});}
-			else{
-				db.collection(colName).find(query).toArray(function (err, result) {
-				callback2Promise(err, result, deferred);
-			});}
-			}
-		)
+			var coll = db.collection(colName);
+			var cursor = proj ? coll.find(query, proj) : cursor = coll.find(query);
+			cursor
+				.skip(_skip)
+				.limit(_limit)
+				.sort(_sort)
+				.toArray(function (err, result) {
+					callback2Promise(err, result, deferred);
+				});
+		})
 		.fail(function (err) {
 			callback2Promise(err, null, deferred);
 		});
