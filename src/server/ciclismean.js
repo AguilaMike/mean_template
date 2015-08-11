@@ -10,5 +10,6 @@ var express = require('./lib/express.js');
 var app = express.createApp();
 logger.info('steady... express router ok');
 
-app.listen(settings.port);
-logger.warn('go... listening on port: ' + settings.port);
+var server = app.listen(settings.port, function(){
+	logger.warn('go... listening on port: ' + server.address().port);
+});
