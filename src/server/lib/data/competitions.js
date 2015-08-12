@@ -16,6 +16,14 @@ function findingBySearch(mongoQuery) {
     return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 }
 
-exports.removing = function (mongoQuery) {
-    return mongodb.removing(colName, mongoQuery.query, null);
+exports.inserting = function (document) {
+    return mongodb.inserting(colName, document);
+}
+
+exports.updating = function (id, document) {
+    return mongodb.updating(colName, {_id:id}, document, null);
+}
+
+exports.removing = function (id) {
+    return mongodb.removing(colName, {_id:id}, null);
 }

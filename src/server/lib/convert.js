@@ -12,7 +12,7 @@ function promise2response(prom, res) {
     prom
         .then(function response(result) {
             if (result) {
-                logger.debug("result: ", result);
+                logger.debug("result: ", JSON.stringify(result));
                 res.json(result);
             } else {
                 logger.warn("no result found ");

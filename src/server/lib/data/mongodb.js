@@ -91,6 +91,7 @@ function aggregating(colName, query) {
 }
 
 function inserting(colName, document) {
+	logger.debug("insert : " + JSON.stringify(document));
 	var deferred = Q.defer();
 	connecting()
 		.then(function (db) {
@@ -106,6 +107,7 @@ function inserting(colName, document) {
 }
 
 function updating(colName, query, update, options) {
+	logger.debug("update : " + JSON.stringify(query) + JSON.stringify(update));
 	var deferred = Q.defer();
 	connecting()
 		.then(function (db) {
