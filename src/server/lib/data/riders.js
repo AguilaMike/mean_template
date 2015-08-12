@@ -14,26 +14,22 @@ exports.finding = function (mongoQuery) {
 }
 
 function findingBySearch(mongoQuery) {   
-    var rq = {
-        $regex: ".*" + mongoQuery.search + ".*",
-        $options: 'i'
-    };
     mongoQuery.query = {
         $or: [
             {
-                _id: rq
+                _id: mongoQuery.search
             }, 
             {
-                lob: rq
+                lob: mongoQuery.search
             }, 
             {
-                team: rq
+                team: mongoQuery.search
             }, 
             {
-                safe_name: rq
+                safe_name: mongoQuery.search
             }, 
             {
-                team_rol: rq
+                team_rol: mongoQuery.search
             }
         ]
     }

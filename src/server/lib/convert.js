@@ -1,10 +1,10 @@
 var logger = require('./logger.js');
 
-module.exports={
-	/** promise to response */
-	prom2res : promise2response,
-	/** request to mongo query */
-	req2mongo : request2mongoq,
+module.exports = {
+    /** promise to response */
+    prom2res: promise2response,
+    /** request to mongo query */
+    req2mongo: request2mongoq,
     /** takes callback parameters and returns a promise response */
     cllbck2prom: callback2Promise
 }
@@ -33,7 +33,14 @@ function request2mongoq(req) {
         mongoQuery.query._id = req.params.id;
     }
     // coll/?search=contador
-    mongoQuery.search = req.query.search;                
+    if (req.query.search) { 
+        var regexOperator = {
+            $regex: ".*" + req.query.search + ".*",
+            $options: 'i'
+        }
+        mongoQuery.search = regexOperator;
+    }
+                   
     // coll/?skip=1&limit=1000
     mongoQuery.skip = parseInt(req.query.skip) || 0;
     mongoQuery.limit = parseInt(req.query.limit) || 10;
@@ -67,10 +74,10 @@ function request2mongoq(req) {
 
 
 function callback2Promise(err, result, deferred) {
-	if (err) {
-		logger.error(err);
-		deferred.reject(err);
-	} else {
-		deferred.resolve(result);
-	}
+    if (err) {
+        logger.error(err);
+        deferred.reject(err);
+    } else {
+        deferred.resolve(result);
+    }
 }

@@ -13,23 +13,19 @@ exports.finding = function (mongoQuery) {
 }
 
 function findingBySearch(mongoQuery) {   
-    var rq = {
-        $regex: ".*" + mongoQuery.search + ".*",
-        $options: 'i'
-    };
     mongoQuery.query = {
         $or: [
             {
-                _id: rq
+                _id: mongoQuery.search
             },  
             {
-                uci: rq
+                uci: mongoQuery.search
             }, 
             {
-                safe_name: rq
+                safe_name: mongoQuery.search
             }, 
             {
-                country: rq
+                country: mongoQuery.search
             }]
     }
     return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);

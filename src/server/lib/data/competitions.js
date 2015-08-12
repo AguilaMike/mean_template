@@ -12,11 +12,7 @@ exports.finding = function (mongoQuery) {
 }
 
 function findingBySearch(mongoQuery) {
-    var rq = {
-        $regex: ".*" + mongoQuery.search + ".*",
-        $options: 'i'
-    };
-    mongoQuery.query = { $or: [{ _id: rq }] }
+    mongoQuery.query = { $or: [{ _id: mongoQuery.search }] }
     return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 }
 
