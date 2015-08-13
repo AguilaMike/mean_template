@@ -1,15 +1,14 @@
 var mongodb = require('./mongodb.js');
 var logger = require('../logger.js');
 
-var colName = 'riders';
+var colName = 'teams';
 
 exports.finding = function (mongoQuery) {   
     if(!mongoQuery.sort){
         mongoQuery.sort = {
-        total_victories: -1,
         name: 1}
     }
-    if(mongoQuery.search) return mongodb,findingBySearch(mongoQuery);
+    if(mongoQuery.search) return findingBySearch(mongoQuery);
     return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 }
 
@@ -18,23 +17,20 @@ function findingBySearch(mongoQuery) {
         $or: [
             {
                 _id: mongoQuery.search
-            }, 
+            },  
             {
-                lob: mongoQuery.search
-            }, 
-            {
-                team: mongoQuery.search
+                uci: mongoQuery.search
             }, 
             {
                 safe_name: mongoQuery.search
             }, 
             {
-                team_rol: mongoQuery.search
-            }
-        ]
+                country: mongoQuery.search
+            }]
     }
     return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 }
+
 exports.inserting = function (document) {
     return mongodb.inserting(colName, document);
 }

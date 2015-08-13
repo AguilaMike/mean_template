@@ -1,17 +1,23 @@
+/* global . */
 var express = require('express');
+var logger = require('../../logger.js');
+var convert = require('../../convert.js');
+var data = require('../../data/teams.js');
+var riders = require('../../data/riders.js');
 
 var router = express.Router({
     mergeParams: true
 });
-
+   
 router
-    .get('/', function (req, res) { res.send("teams"); })
-    .get('/:id', function (req, res) { res.send("team: " + req.params.id) })
-    .get('/safename/:safe_name', function (req, res) { res.send("team: " + req.params.safe_name) })
-    .get('/:id/riders', function (req, res) { res.send("riders for team: " + req.params.id) })
-    .post('/', function (req, res) { })
-    .put('/:id', function (req, res) { })
-    .delete('/:id', function (req, res) { });
+    .get('/', function (req, res) { convert.prom2res(data.finding(convert.req2mongo(req)), res); })
+    .get('/:id', function (req, res) { convert.prom2res(data.finding(convert.req2mongo(req)), res); })
+    .post('/', function (req, res) { convert.prom2res(data.inserting(req.body), res); })
+    .put('/:id', function (req, res) { convert.prom2res(data.updating(req.params.id,req.body), res);})
+    .delete('/:id', function (req, res) { convert.prom2res(data.removing(req.params.id), res);})
+    .get('/:id/riders', function (req, res) {
+        convert.prom2res(riders.finding({query:{"team":req.params.id}}), res);
+    });
 
 module.exports = router;
 
