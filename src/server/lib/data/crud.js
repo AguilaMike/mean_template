@@ -14,7 +14,7 @@ module.exports.crud = function (colname) {
 }
 
 function finding(mongoQuery) {
-    if (mongoQuery.search) return mongodb, findingBySearch(mongoQuery);
+    if (mongoQuery.search) return findingBySearch(mongoQuery);
     return mongodb.finding(this._colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 }
 
