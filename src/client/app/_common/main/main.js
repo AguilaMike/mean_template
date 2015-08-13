@@ -1,7 +1,7 @@
 "use strict";
 (function () {
     angular
-        .module('main', [])
+        .module('main', ['ngAnimate'])
         .directive('mainContent', directive)
 
     function directive() {
