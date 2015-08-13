@@ -32,7 +32,7 @@ function request2mongoq(req) {
         mongoQuery.query = {};
         mongoQuery.query._id = req.params.id;
     }
-    // coll/?search=contador
+    // coll/?search=text
     if (req.query.search) { 
         var regexOperator = {
             $regex: ".*" + req.query.search + ".*",
