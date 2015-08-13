@@ -31,7 +31,7 @@
         function init() {
             riderDataService.gettingRiders()
                 .then(function (riders) {
-                    vm.riders = result;
+                    vm.riders = riders;
                 })
         }
 
@@ -43,7 +43,7 @@
         var riders = $resource('api/riders');
 
         factory.gettingRiders = function () {
-            riders.query().$promise;
+            return riders.query().$promise;
         }
 
         return factory;
