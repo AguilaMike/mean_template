@@ -29,7 +29,11 @@
         init();
 
         function init() {
-            riderDataService.gettingRiders()
+            riderDataService.gettingRiders({
+                    limit: 100,
+                    skip: 1,
+                    sort: '-_id'
+                })
                 .then(function (riders) {
                     vm.riders = riders;
                 })
@@ -40,10 +44,10 @@
     function riderDataService($resource) {
         var factory = {};
 
-        var riders = $resource('api/riders');
+        var riders = $resource('api/riders', {});
 
-        factory.gettingRiders = function () {
-            return riders.query().$promise;
+        factory.gettingRiders = function (params) {
+            return riders.query(params).$promise;
         }
 
         return factory;
