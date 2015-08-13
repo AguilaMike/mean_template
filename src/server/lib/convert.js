@@ -8,6 +8,7 @@ module.exports = {
     /** takes callback parameters and returns a promise response */
     cllbck2prom: callback2Promise
 }
+
 function promise2response(prom, res) {
     prom
         .then(function response(result) {
@@ -27,20 +28,20 @@ function promise2response(prom, res) {
 
 function request2mongoq(req) {
     var mongoQuery = {}
-    // coll/:id
+        // coll/:id
     if (req.params.id) {
         mongoQuery.query = {};
         mongoQuery.query._id = req.params.id;
     }
     // coll/?search=text
-    if (req.query.search) { 
+    if (req.query.search) {
         var regexOperator = {
             $regex: ".*" + req.query.search + ".*",
             $options: 'i'
         }
         mongoQuery.search = regexOperator;
     }
-                   
+
     // coll/?skip=1&limit=1000
     mongoQuery.skip = parseInt(req.query.skip) || 0;
     mongoQuery.limit = parseInt(req.query.limit) || 10;
@@ -53,17 +54,17 @@ function request2mongoq(req) {
             mongoQuery.sort[sortField] = sortField.substring("-") ? -1 : 1
         })
     }
-    // coll/?q=field+value
+    // coll/?q=field:value
     if (req.query.q) {
         mongoQuery.query = {};
         if (req.query.q instanceof Array) {
             req.query.q.forEach(function (queryField) {
                 parseQueryField(queryField);
             })
-        }
-        else {
+        } else {
             parseQueryField(req.query.q);
         }
+
         function parseQueryField(queryField) {
             var queryPairs = queryField.split(":");
             mongoQuery.query[queryPairs[0]] = queryPairs[1];
