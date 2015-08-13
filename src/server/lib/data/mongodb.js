@@ -31,7 +31,7 @@ function connecting() {
 }
 
 function finding(colName, query, proj, skip, limit, sort) {
-	logger.debug("find : " + JSON.stringify(query));
+	logger.debug(colName + " find : " + JSON.stringify(query));
 	var _skip = skip || 0;
 	var _limit = limit || 1000;
 	var _sort = sort || { _id: -1 };
@@ -91,7 +91,7 @@ function aggregating(colName, query) {
 }
 
 function inserting(colName, document) {
-	logger.debug("insert : " + JSON.stringify(document));
+	logger.debug(colName + " insert : " + JSON.stringify(document));
 	var deferred = Q.defer();
 	connecting()
 		.then(function (db) {
@@ -107,7 +107,7 @@ function inserting(colName, document) {
 }
 
 function updating(colName, query, update, options) {
-	logger.debug("update : " + JSON.stringify(query) + JSON.stringify(update));
+	logger.debug(colName + " update : " + JSON.stringify(query) + JSON.stringify(update));
 	var deferred = Q.defer();
 	connecting()
 		.then(function (db) {
@@ -123,7 +123,7 @@ function updating(colName, query, update, options) {
 }
 
 function removing(colName, query, options) {
-	logger.debug("removing : " + JSON.stringify(query));
+	logger.debug(colName + " removing : " + JSON.stringify(query));
 	var deferred = Q.defer();
 	connecting()
 		.then(function (db) {

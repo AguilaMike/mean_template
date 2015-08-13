@@ -1,49 +1,19 @@
 var mongodb = require('./mongodb.js');
 var logger = require('../logger.js');
+var colName = 'users';
+var _crud = require('./crud.js').crud(colName);
+exports.crud = _crud;
 
-var colName = 'riders';
 
 exports.finding = function (mongoQuery) {
     if (!mongoQuery.sort) {
-        mongoQuery.sort = {
-            total_victories: -1,
-            name: 1
-        }
+        mongoQuery.sort = { _id: 1 }
     }
     if (mongoQuery.search) return mongodb, findingBySearch(mongoQuery);
-    return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
+    return _crud.finding(mongoQuery);
 }
 
 function findingBySearch(mongoQuery) {
-    mongoQuery.query = {
-        $or: [
-            {
-                _id: mongoQuery.search
-            },
-            {
-                lob: mongoQuery.search
-            },
-            {
-                team: mongoQuery.search
-            },
-            {
-                safe_name: mongoQuery.search
-            },
-            {
-                team_rol: mongoQuery.search
-            }
-        ]
-    }
-    return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
-}
-exports.inserting = function (document) {
-    return mongodb.inserting(colName, document);
-}
-
-exports.updating = function (mongoQuery) {
-    return mongodb.updating(colName, mongoQuery.query, null, null);
-}
-
-exports.removing = function (mongoQuery) {
-    return mongodb.removing(colName, mongoQuery.query, null);
+    mongoQuery.query = { $or: [{ _id: mongoQuery.search }] }
+    return _crud.finding(mongoQuery.query);
 }

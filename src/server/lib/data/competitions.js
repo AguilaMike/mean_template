@@ -1,29 +1,20 @@
 var mongodb = require('./mongodb.js');
 var logger = require('../logger.js');
-
 var colName = 'competitions';
+var _crud = require('./crud.js').crud(colName);
+exports.crud = _crud;
+
 
 exports.finding = function (mongoQuery) {
     if (!mongoQuery.sort) {
         mongoQuery.sort = { _id: 1 }
     }
     if (mongoQuery.search) return mongodb, findingBySearch(mongoQuery);
-    return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
+    return _crud.finding(mongoQuery);
 }
 
 function findingBySearch(mongoQuery) {
     mongoQuery.query = { $or: [{ _id: mongoQuery.search }] }
-    return mongodb.finding(colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
+    return _crud.finding(mongoQuery.query);
 }
 
-exports.inserting = function (document) {
-    return mongodb.inserting(colName, document);
-}
-
-exports.updating = function (id, document) {
-    return mongodb.updating(colName, {_id:id}, document, null);
-}
-
-exports.removing = function (id) {
-    return mongodb.removing(colName, {_id:id}, null);
-}
