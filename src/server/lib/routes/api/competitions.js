@@ -6,6 +6,19 @@ var router = express.Router({
     mergeParams: true
 });
 
-crud(router,competitions);
+var schema = {
+        id: "competitionDetails",
+        type: "object",
+        properties: {
+            _id: { type: "string" },
+            category: { type: "string" }
+        },
+        required: ["_id", "category"]
+    }
     
+crud(router,competitions, schema);
+
+
+
+
 module.exports = router;

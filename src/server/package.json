@@ -19,6 +19,7 @@
     "q": "^1.4.1",
     "request": "^2.55.0",
     "winston": "^1.0.0",
-    "winston-mongodb": "^1.1.1"
+    "winston-mongodb": "^1.1.1",
+    "z-schema": "^3.12.2"
   }
 }
