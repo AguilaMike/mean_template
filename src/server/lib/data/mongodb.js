@@ -96,8 +96,8 @@ function inserting(colName, document) {
 	connecting()
 		.then(function (db) {
 			db.collection(colName)
-				.insert(document, function (err, result) {
-					convert.cllbck2prom(err, result, deferred);
+				.insert(document,{w:1}, function (err, result) {
+					convert.cllbck2prom(err, document, deferred);
 				});
 		})
 		.fail(function (err) {

@@ -8,7 +8,7 @@ var securityData = require('./data/security-data.js');
 
 /** configures a the logging system */
 exports.useExpressLog = function expressLog(app) {
-    var jsonLog = '{"url": ":url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
+    var jsonLog = '{"url": ":method:url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
     app.use(morgan(jsonLog, {
         "skip": function (req, res) {
             return res.statusCode < 100
