@@ -8,12 +8,17 @@ function Data(colName) {
     logger.debug("crud para " + this.colName);
 }
 
-Data.prototype.finding = function finding(mongoQuery) {
-    if (mongoQuery.search) return findingBySearch(mongoQuery);
+Data.prototype.finding = function finding(mongoQuery,defaultSort, defaultSearch) {
+    if (!mongoQuery.sort) {
+        mongoQuery.sort = defaultSort || {_id:-1};
+    }
+    if (mongoQuery.search)  {
+        mongoQuery.query = defaultSearch || { $or: [{ _id: mongoQuery.search }] };
+        return findingBySearch(mongoQuery);
+    }
     return mongodb.finding(this.colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
 };
 Data.prototype.inserting = function inserting(document) {
-    logger.debug("inserting  " + this.colName);
     return mongodb.inserting(this.colName, document);
 };
 Data.prototype.updating = function updating(id, document) {
