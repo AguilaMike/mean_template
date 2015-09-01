@@ -42,13 +42,13 @@ exports.getFile = function (req, res, urlRedirect) {
 	var key = urlRedirect || decodeURI(req.path);
 	if (key === "/") key = '/index.html'
 	var filePath = path.join(dir, './../../client' + key);
-	//metrics.count("count.read.file.cache: " + filePath);
+	metrics.count("count.read.file.cache: " + filePath);
 	var mimeType = mime.lookup(filePath);
 	if (memoryFileCache) {
 		memoryFileCache.wrap(key,
 			function (cb) {
 				fs.readFile(filePath, function (err, data) {
-					//metrics.sum("sum.feed.file.cache: " + key,data.length);
+					metrics.sum("sum.feed.file.cache: " + key,data.length);
 					cb(err, data);
 				});
 			},
@@ -67,7 +67,7 @@ exports.getFile = function (req, res, urlRedirect) {
 exports.getJsonApi = function (req, res) {
 	if (memoryJsonCache) {
 		var key = req.url;
-		//metrics.count("count.read.api.cache: " + key);
+		metrics.count("count.read.api.cache: " + key);
 		memoryJsonCache.wrap(key,
 			function (cb) {
 				// TODO: call for data

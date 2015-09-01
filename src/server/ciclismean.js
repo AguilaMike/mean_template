@@ -9,7 +9,6 @@ mongodb.connecting().then(function (db) {
 	logger.info('ready... settings ok', settings);
 	var metrics = require("./lib/metrics.js");
 	metrics.count(settings.name + ".start");
-
 	var express = require('./lib/express.js');
 	var app = express.createApp();
 	logger.info('steady... express router ok');

@@ -3,25 +3,19 @@ var logger = require('./logger.js');
 
 var colName = 'metrics';
 
-module.exports = {
-    count: count
-}
 
 /** to count how many times an event has ocurred */
-function count(key) {
-    logger.info('count metrics ' + key);   
+module.exports.count = function(key) {  
     saveMetric(key, 0);
 };
 /** to sum a quantity to a category event */
 module.exports.sum = function (key, quantity) {
-    logger.info('sum metrics ' + key, quantity);
     saveMetric(key, quantity);
 };
 
 
 function saveMetric(key, quantity) {
     var query = { _id: key };
-    logger.info('saveMetric ' , JSON.stringify(mongodb))
     mongodb.finding(colName, query, null)
         .then(function (item) {
             if (!item) {

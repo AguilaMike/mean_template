@@ -1,7 +1,6 @@
 var winston = require('winston');
 var MongoDB = require('winston-mongodb');
 var settings = require("./settings.js");
-var metrics = require("./metrics.js");
 var logger = null;
 winston.emitErrs = true;
 var console = new winston.transports.Console({
@@ -48,10 +47,8 @@ module.exports.morgan_stream = {
 				meta.cnt = 0;
 			} else {
 				meta.cnt = parseInt(meta.cnt)
-				metrics.sum("sum.express",meta.cnt);
 			}
 			logger.info("express", meta);
-			metrics.count("count.express");
 		} catch (err) {
 			logger.error("morgan_stream", err);
 		}
