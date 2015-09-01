@@ -6,6 +6,17 @@ var router = express.Router({
     mergeParams: true
 });
 
-crud(router,users);
+var schema = {
+        id: "rolesDetails",
+        type: "object",
+        properties: {
+            _id: { type: "string" },
+            name: { type: "string" },
+            password: { type: "string" },
+            email: { type: "string" }
+        },
+        required: ["_id", "name", "password", "email"]
+    }
+crud(router,users, schema);
     
 module.exports = router;

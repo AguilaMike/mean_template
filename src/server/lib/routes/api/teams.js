@@ -8,7 +8,20 @@ var router = express.Router({
     mergeParams: true
 });
 
-crud(router,teams);
+
+var schema = {
+        id: "ridersDetails",
+        type: "object",
+        properties: {
+            _id: { type: "string" },
+            safe_name: { type: "string" },
+            uci: { type: "string" },
+            status: { type: "string" },
+            country: { type: "string" }
+        },
+        required: ["_id", "safe_name"]
+    }
+crud(router,teams, schema);
 
 router
     .get('/:id/riders', function (req, res) {

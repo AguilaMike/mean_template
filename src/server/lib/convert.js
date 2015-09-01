@@ -9,26 +9,32 @@ module.exports = {
     cllbck2prom: callback2Promise
 }
 
-function promise2response(prom, res) {
+function promise2response(prom, res, statusOk) {
     prom
         .then(function response(result) {
-            if (result) {
-                logger.debug("result: ", JSON.stringify(result));
-                res.json(result);
-            } else {
+            if (typeof result == "undefined" || result == null || (Array.isArray(result) && result.length <= 0)) {
                 logger.warn("no result found ");
-                res.status(404).json({});
+                res.status(404).json();
+            } else {
+                logger.debug("result: ", JSON.stringify(result));
+                res.status(statusOk).json(result);
             }
         })
         .fail(function error(err) {
-            logger.error(err);
-            res.status(500).send(err);
+            if (err.code === 11000) {
+                logger.warn(err);
+                res.status(409).send(err);
+            }
+            else {
+                logger.error(err);
+                res.status(500).send(err);
+            }
         });
 }
 
 function request2mongoq(req) {
     var mongoQuery = {}
-        // coll/:id
+    // coll/:id
     if (req.params.id) {
         mongoQuery.query = {};
         mongoQuery.query._id = req.params.id;
