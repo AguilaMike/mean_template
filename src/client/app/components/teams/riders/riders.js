@@ -1,22 +1,22 @@
 "use strict";
 (function () {
     angular
-        .module('rider', ['ui.router', 'ngResource'])
+        .module('riders', ['ui.router', 'ngResource'])
         .config(config)
-        .directive('rider', directive)
+        .directive('riders', directive)
         .factory('riderDataService', riderDataService)
 
     function config($stateProvider) {
         $stateProvider
             .state('riders', {
                 url: '/riders',
-                template: '<rider></rider>'
+                template: '<riders></riders>'
             });
     }
 
     function directive() {
         return {
-            templateUrl: 'app/components/team/rider/rider.html',
+            templateUrl: 'app/components/teams/riders/riders.html',
             controller: controller,
             controllerAs: "vm",
             bindToController: true

@@ -1,34 +1,34 @@
 "use strict";
 (function () {
     angular
-        .module('team', ['ui.router', 'rider'])
+        .module('teams', ['ui.router', 'riders'])
         .config(config)
-        .directive('team', directive)
-        .factory('teamDataService', teamDataService)
+        .directive('teams', directive)
+        .factory('teamsDataService', teamsDataService)
 
     function config($stateProvider) {
         $stateProvider
-            .state('team', {
+            .state('teams', {
                 url: '/equipos',
-                template: '<team></team>'
+                template: '<teams></teams>'
             });
     }
 
     function directive() {
         return {
-            templateUrl: 'app/components/team/team.html',
+            templateUrl: 'app/components/teams/teams.html',
             controller: controller,
             controllerAs: "vm",
             bindToController: true
         }
     }
 
-    function controller(teamDataService, $rootScope) {
+    function controller(teamsDataService, $rootScope) {
         var vm = this;
 
     }
 
-    function teamDataService($resource) {
+    function teamsDataService($resource) {
         var factory = {};
 
 
