@@ -1,11 +1,13 @@
 var mongodb = require('./mongodb.js');
-var logger = require('../logger.js');
+var logger = require('../../logger.js');
 
 
-module.exports.crud = function (colname) {
+module.exports.crud = function (colname, sort, limit) {
     logger.debug("crud para " + colname);
     return {
         _colName : colname,
+        _sort : sort || { _id: -1 },
+        _limit : limit || 100,
         finding: finding,
         inserting: inserting,
         updating: updating,
@@ -14,13 +16,9 @@ module.exports.crud = function (colname) {
 }
 
 function finding(mongoQuery) {
-    if (mongoQuery.search) return findingBySearch(mongoQuery);
-    return mongodb.finding(this._colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
+    return mongodb.finding(this._colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit || this._limit, mongoQuery.sort || this._sort);
 }
 
-function findingBySearch(mongoQuery) {
-    return mongodb.finding(this._colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit, mongoQuery.sort);
-}
 function inserting(document) {
     return mongodb.inserting(this._colName, document);
 }

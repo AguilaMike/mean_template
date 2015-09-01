@@ -4,7 +4,7 @@ var cache = require('./cache.js');
 var compression = require('compression');
 var multer = require('multer');
 var bodyParser = require('body-parser');
-var securityData = require('./data/security-data.js');
+
 
 /** configures a the logging system */
 exports.useExpressLog = function expressLog(app) {

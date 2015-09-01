@@ -1,4 +1,4 @@
-var mongodb = require('./data/mongodb.js');
+var mongodb = require('./data/util/mongodb.js');
 var logger = require('./logger.js');
 
 var colName = 'metrics';

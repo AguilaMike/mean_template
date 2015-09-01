@@ -1,5 +1,5 @@
 var express = require('express');
-var crud = require('./crud.js');
+var crud = require('./util/crud.js');
 var users = require('../../data/users.js');
 
 var router = express.Router({
