@@ -8,10 +8,9 @@ var bodyParser = require('body-parser');
 
 /** configures a the logging system */
 exports.useExpressLog = function expressLog(app) {
-    var jsonLog = '{"url": ":url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
-    app.use(morgan(jsonLog, {
+    app.use(morgan(logger.morgan_json, {
         "skip": function (req, res) {
-            return res.statusCode < 100
+            return false;//res.statusCode < 100
         },
         "stream": logger.morgan_stream
     }));

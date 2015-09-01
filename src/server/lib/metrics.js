@@ -3,36 +3,52 @@ var logger = require('./logger.js');
 
 var colName = 'metrics';
 
+module.exports = {
+    count: count
+}
+
 /** to count how many times an event has ocurred */
-exports.count = function (key) {
-    var q = { _id: key };
-    mongodb.findingOne(colName, q, null)
+function count(key) {
+    logger.info('count metrics ' + key);   
+    saveMetric(key, 0);
+};
+/** to sum a quantity to a category event */
+module.exports.sum = function (key, quantity) {
+    logger.info('sum metrics ' + key, quantity);
+    saveMetric(key, quantity);
+};
+
+
+function saveMetric(key, quantity) {
+    var query = { _id: key };
+    logger.info('saveMetric ' , JSON.stringify(mongodb))
+    mongodb.finding(colName, query, null)
         .then(function (item) {
             if (!item) {
-                newMetric(q);
+                newMetric(query, quantity);
             } else {
-                updateMetric(q);
+                updateMetric(query, quantity);
             }
         });
 };
 /** creates a new entry for new event category */
-function newMetric(q) {
+function newMetric(query, value) {
     var updt = {
-        _id: q._id,
+        _id: query._id,
         first: new Date(),
         last: new Date(),
-        counter: 1
+        counter: 1,
+        sum: value
     };
     var opt = { upsert: true };
-    mongodb.updating(colName, q, updt, opt);
+    mongodb.updating(colName, query, updt, opt);
 }
 
-/** updates the counter */
-function updateMetric(q) {
+/** updates a metric for an existing event category */
+function updateMetric(query, value) {
     var updt = {
-        $inc: { counter: 1 },
+        $inc: { counter: 1, sum: value },
         $set: { last: new Date() }
     };
-    mongodb.updating(colName, q, updt, null);
+    mongodb.updating(colName, query, updt, null);
 }
-

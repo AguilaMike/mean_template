@@ -1,6 +1,7 @@
 var winston = require('winston');
 var MongoDB = require('winston-mongodb');
 var settings = require("./settings.js");
+var metrics = require("./metrics.js");
 var logger = null;
 winston.emitErrs = true;
 var console = new winston.transports.Console({
@@ -31,6 +32,9 @@ function config() {
 	}
 	return logger;
 };
+
+/** json template for log entry objects */
+module.exports.morgan_json = '{"url": ":url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
 /** an input stream that receives events from morgan and sends them to winston  */
 module.exports.morgan_stream = {
 	write: function (message, encoding) {
@@ -44,8 +48,10 @@ module.exports.morgan_stream = {
 				meta.cnt = 0;
 			} else {
 				meta.cnt = parseInt(meta.cnt)
+				metrics.sum("sum.express",meta.cnt);
 			}
 			logger.info("express", meta);
+			metrics.count("count.express");
 		} catch (err) {
 			logger.error("morgan_stream", err);
 		}

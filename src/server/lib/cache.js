@@ -10,6 +10,7 @@ var hour = minute * 60;
 var day = hour * 24;
 var memoryFileCache = {};
 var memoryJsonCache = {};
+var dir = __dirname;
 
 /** initializes cache with settings data */
 exports.initCache = function () {
@@ -40,13 +41,14 @@ exports.resetCache = function (req, res) {
 exports.getFile = function (req, res, urlRedirect) {
 	var key = urlRedirect || decodeURI(req.path);
 	if (key === "/") key = '/index.html'
-	var filePath = path.join(__dirname, './../../client' + key);
+	var filePath = path.join(dir, './../../client' + key);
+	//metrics.count("count.read.file.cache: " + filePath);
 	var mimeType = mime.lookup(filePath);
 	if (memoryFileCache) {
 		memoryFileCache.wrap(key,
 			function (cb) {
 				fs.readFile(filePath, function (err, data) {
-					metrics.count("cache.feed: " + key);
+					//metrics.sum("sum.feed.file.cache: " + key,data.length);
 					cb(err, data);
 				});
 			},
@@ -61,15 +63,16 @@ exports.getFile = function (req, res, urlRedirect) {
 		});
 	}
 };
-/** not imoplemented data cache */
+/** not implemented data cache */
 exports.getJsonApi = function (req, res) {
 	if (memoryJsonCache) {
 		var key = req.url;
+		//metrics.count("count.read.api.cache: " + key);
 		memoryJsonCache.wrap(key,
 			function (cb) {
 				// TODO: call for data
-				metrics.count("cache.feed: " + key);
-				cb(error, body);
+				//metrics.sum("sum.feed.api.cache: " + key, body.length);
+				//cb(error, body);
 			},
 			function (err, result) {
 				metrics.count("cache.use: " + key);
