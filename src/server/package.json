@@ -1,9 +1,19 @@
 {
-  "name": "ciclismean",
+  "name": "mean_template",
   "version": "1.0.0",
-  "description": "ciclismean ciclismania",
-  "main": "ciclismean.js",
-  "author": "Agora Binaria",
+  "description": "mean template",
+  "main": "mean_template.js",
+  "author": "Agora Binaria <info@agorabinaria.com>",
+  "contributors": [
+    {
+      "name": "Mario Cordovilla",
+      "email": "mariocordovilla@agorabinaria.com"
+    },
+    {
+      "name": "Alberto Basalo",
+      "email": "albertobasalo@agorabinaria.com"
+    }
+  ],
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.12.2",

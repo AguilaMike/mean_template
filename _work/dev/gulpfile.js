@@ -3,7 +3,7 @@ var nodemon = require('gulp-nodemon');
 
 var src = '../../src/';
 var server = 'server/';
-var serverFile = server + 'ciclismean.js';
+var serverFile = server + 'mean_template.js';
 var client = 'client/';
 
 gulp.task('start-nodemon', function () {
