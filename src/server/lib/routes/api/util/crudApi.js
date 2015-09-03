@@ -19,7 +19,15 @@ function crudRouter(router, data, schema) {
                 res.status(400).send(error);
             }
         })
-        .put('/:id', function (req, res) { convert.prom2res(crud.updating(req.params.id, req.body), res, 200); })
+        .put('/:id', function (req, res) {
+            if (!schema || validator.validate(req.body, schema)) {
+                convert.prom2res(crud.updating(req.params.id, req.body), res, 200);
+            }
+            else {
+                var error = validator.getLastError();
+                res.status(400).send(error);
+            }
+        })
         .delete('/:id', function (req, res) { convert.prom2res(crud.removing(req.params.id), res, 204); });
     return router;
 }

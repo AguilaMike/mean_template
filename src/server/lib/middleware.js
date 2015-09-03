@@ -1,9 +1,11 @@
 var morgan = require('morgan');
 var logger = require('./logger.js');
 var cache = require('./cache.js');
+var jwt = require('./jwt.js');
 var compression = require('compression');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+
 
 
 /** configures a the logging system */
@@ -48,7 +50,16 @@ exports.useBodyParser = function useBodyParser(app) {
 /** configures the security system for protected routes */
 exports.useSecurity = function name(app) {
     app.use('/api/priv/', function (req, res, next) {
-        // TODO: JWT
-        next();
+        var token = req.headers['x-access-token']
+        jwt.verify(token, function (err, user){
+            if(err)
+            {
+                return res.status(403).send();
+            }
+            else{
+                req.user = JSON.parse(user);
+                next();
+            }
+        })
     });
 }
