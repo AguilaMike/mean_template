@@ -15,5 +15,3 @@ module.exports = {
     /** key to sign tokens */
     secret:"academia-binaria"
 };
-    
-
