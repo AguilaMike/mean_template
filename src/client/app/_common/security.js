@@ -4,9 +4,9 @@
         $httpProvider.interceptors.push(securityInterceptor);
     }
 
-    function securityInterceptor($injector,$q,  $rootScope) {
+    function securityInterceptor($injector,$q,  $rootScope,  $localStorage) {
         function requestInterceptor (request) {
-
+            request.headers['x-access-token'] =  $localStorage.xAccessToken;
             return request || $q.when(request);
         };
         function responseErrorInterceptor(response) {

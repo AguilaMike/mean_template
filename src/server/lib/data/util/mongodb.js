@@ -10,7 +10,7 @@ module.exports = {
 	/** connects to a database */
 	connecting:connecting,
 	/** connection to a database */
-	connection:connection,
+	getConnection:getConnection,
 	
 	/** performs a find operation that returna an array*/
 	finding: finding,
@@ -33,6 +33,10 @@ function connecting() {
 		convert.cllbck2prom(err, db, deferred);
     });
     return deferred.promise;
+}
+
+function getConnection(){
+	return connection;
 }
 
 function finding(colName, query, proj, skip, limit, sort) {
