@@ -27,8 +27,14 @@
         }
     }
 
-    function controller() {
+    function controller(usersDataService) {
         var vm = this;
+
+        init();
+
+        function init() {
+            vm.user = usersDataService.gettingUser();
+        }
 
         vm.model = {
             url: 'http://'

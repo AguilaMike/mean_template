@@ -13,47 +13,60 @@ var schema = {
     id: "rolesDetails",
     type: "object",
     properties: {
-        _id: { type: "string" },
-        name: { type: "string" },
-        password: { type: "string" },
-        email: { type: "string" }
+        _id: {
+            type: "string"
+        },
+        name: {
+            type: "string"
+        },
+        password: {
+            type: "string"
+        },
+        email: {
+            type: "string"
+        }
     },
     required: ["_id", "name", "password", "email"]
 }
 
-router.post('/', function (req, res) {
-    // REGISTERING NEW USER
-    usersData.findingByEmail(req.body.email)
-        .then(function (user) {
-            if (user) {
-                return res.status(409).send();
-            } else {
-                user = req.body;
-                usersData.count()
-                    .then(function (count) {
-                        if (count == 0) user.role = "GOD";
-                        usersData.crud.inserting(user)
-                            .then(function (user) {
-                                var token = generateToken(user);
-                                return res.status(201).json(token);
-                            })
-                            .fail(function (err) {
-                                logger.error(err);
-                                return res.status(500).send(err);
-                            });
-                    })
-                    .fail(function (err) {
-                        logger.error(err);
-                        return res.status(500).send(err);
-                    });
-            }
-        })
-        .fail(function (err) {
-            logger.error(err);
-            return res.status(500).send(err);
-        });
-});
-
+router
+    .post('/', function (req, res) {
+        // REGISTERING NEW USER
+        usersData.findingByEmail(req.body.email)
+            .then(function (user) {
+                if (user) {
+                    return res.status(409).send();
+                } else {
+                    user = req.body;
+                    usersData.count()
+                        .then(function (count) {
+                            if (count == 0) user.role = "GOD";
+                            usersData.crud.inserting(user)
+                                .then(function (user) {
+                                    var token = generateToken(user);
+                                    console.log(token);
+                                    return res.status(201).send(JSON.stringify(token));
+                                })
+                                .fail(function (err) {
+                                    logger.error(err);
+                                    return res.status(500).send(err);
+                                });
+                        })
+                        .fail(function (err) {
+                            logger.error(err);
+                            return res.status(500).send(err);
+                        });
+                }
+            })
+            .fail(function (err) {
+                logger.error(err);
+                return res.status(500).send(err);
+            });
+    })
+    .get('/', function (req, res) {
+        jwt.verify(req, res);
+        return res.json(req.user);
+    });
 router.post('/session', function (req, res) {
     // LOGIN OF AN ALREADY REGISTERD USER
     usersData.findingByEmailPassword(req.body.email, req.body.password)
@@ -71,6 +84,8 @@ router.post('/session', function (req, res) {
         });
 
 });
+
+
 
 function generateToken(user) {
     user.password = "";

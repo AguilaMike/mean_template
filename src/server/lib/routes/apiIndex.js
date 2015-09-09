@@ -5,4 +5,3 @@ module.exports.apiRoutes = function (app) {
     app.use('/api/roles', require('./api/rolesApi.js'));
     app.use('/api/users', require('./api/usersApi.js'));
 }
-

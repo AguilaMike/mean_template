@@ -12,11 +12,12 @@ var bodyParser = require('body-parser');
 exports.useExpressLog = function expressLog(app) {
     app.use(morgan(logger.morgan_json, {
         "skip": function (req, res) {
-            return false;//res.statusCode < 100
+            return false; //res.statusCode < 100
         },
         "stream": logger.morgan_stream
     }));
     app.use(clientErrorHandler);
+
     function clientErrorHandler(err, req, res, next) {
         logger.error(err.message, err.stack);
         if (req.xhr) {
@@ -38,28 +39,24 @@ exports.useCompression = function (app) {
 };
 /** uses an uploader to receive files by post */
 exports.useUploader = function uploader(app) {
-    app.use(multer({ inMemory: true, limits: { fieldNameSize: 100, files: 1 } }));
+    app.use(multer({
+        inMemory: true,
+        limits: {
+            fieldNameSize: 100,
+            files: 1
+        }
+    }));
 };
 /** parses body and urls to get JSON objects */
 exports.useBodyParser = function useBodyParser(app) {
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
-    app.use(bodyParser.json());
-}
-/** configures the security system for protected routes */
+        app.use(bodyParser.urlencoded({
+            extended: true
+        }));
+        app.use(bodyParser.json());
+    }
+    /** configures the security system for protected routes */
 exports.useSecurity = function name(app) {
-    app.use('/api/priv/', function (req, res, next) {
-        var token = req.headers['x-access-token']
-        jwt.verify(token, function (err, user){
-            if(err)
-            {
-                return res.status(403).send();
-            }
-            else{
-                req.user = JSON.parse(user);
-                next();
-            }
-        })
+    app.use('/api/*/priv/', function (req, res, next) {
+        jwt.verify(req, res, next);
     });
 }
