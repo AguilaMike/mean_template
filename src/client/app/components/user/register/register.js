@@ -1,7 +1,7 @@
 "use strict";
 (function () {
     angular
-        .module('register', ['ui.router', 'formMessages', 'ngResource', 'ngStorage'])
+        .module('register', ['ui.router', 'formMessages'])
         .config(config)
         .directive('register', directive)
 
@@ -23,7 +23,7 @@
         }
     }
 
-    function controller(usersDataService, $localStorage, $state) {
+    function controller(usersDataService, $state) {
         var vm = this;
 
         vm.has_error = function (form, field) {
@@ -35,9 +35,7 @@
             if (vm.form.$valid) {
                 var user = usersDataService.newUser(vm.email, vm.password);
                 usersDataService.postingUser(user)
-                    .then(function (token) {
-                        console.log(token);
-                        $localStorage['xAccessToken'] = token;
+                    .then(function (result) {
                         $state.go('profile');
                     }, function (err) {
                         vm.form.token.$error.invalidtoken = true;

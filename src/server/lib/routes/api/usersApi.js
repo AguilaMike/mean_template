@@ -43,9 +43,7 @@ router
                             if (count == 0) user.role = "GOD";
                             usersData.crud.inserting(user)
                                 .then(function (user) {
-                                    var token = generateToken(user);
-                                    console.log(token);
-                                    return res.status(201).send(JSON.stringify(token));
+                                    return jwt.generate(JSON.stringify(user), res);
                                 })
                                 .fail(function (err) {
                                     logger.error(err);
@@ -67,15 +65,14 @@ router
         jwt.verify(req, res);
         return res.json(req.user);
     });
-router.post('/session', function (req, res) {
+router.post('/sessions', function (req, res) {
     // LOGIN OF AN ALREADY REGISTERD USER
     usersData.findingByEmailPassword(req.body.email, req.body.password)
         .then(function (user) {
             if (user) {
-                var token = generateToken(user);
-                return res.status(200).json(token);
+                return jwt.generate(JSON.stringify(user), res);
             } else {
-                return res.status(400).send();
+                return res.status(401).send({error:"Invalid email or password"});
             }
         })
         .fail(function (err) {
@@ -84,13 +81,6 @@ router.post('/session', function (req, res) {
         });
 
 });
-
-
-
-function generateToken(user) {
-    user.password = "";
-    return jwt.generate(JSON.stringify(user));
-}
 
 crudApi(router, usersData, schema);
 module.exports = router;

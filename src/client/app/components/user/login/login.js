@@ -22,7 +22,7 @@
         }
     }
 
-    function controller() {
+    function controller(usersDataService, $state) {
         var vm = this;
 
         vm.has_error = function (form, field) {
@@ -30,9 +30,15 @@
         }
 
         vm.submit = function (form) {
-            form.$submitted = true;
-            if (form.$valid) {
-                console.log("do something");
+            vm.form.$submitted = true;
+            if (vm.form.$valid) {
+                var session = usersDataService.newSession(vm.email, vm.password);
+                usersDataService.postingSession(session)
+                    .then(function (result) {
+                        $state.go('profile');
+                    }, function (err) {
+                        vm.form.token.$error.invalidtoken = true;
+                    })
             }
         }
     }

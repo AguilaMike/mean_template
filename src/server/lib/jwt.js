@@ -2,19 +2,19 @@ var jwt = require('jsonwebtoken');
 var logger = require('./logger.js');
 var settings = require("./settings.js");
 
-exports.generate = function (user) {
+exports.generate = function (user, res) {
+    user.password = "";
     var token = jwt.sign(user, secret(), {
         expiresInMinutes: 20
     });
-    return token;
+    return res.status(201).json({token:token});
 }
 
 exports.verify = function (req, res, next) {
     var token = req.headers['x-access-token'];
-    console.log(token);
+    if(!token) return res.status(403).send();
     try {
         req.user = jwt.verify(token, secret());
-        console.log(req.user);
     } catch (err) {
         console.error(err);
         return res.status(403).send();

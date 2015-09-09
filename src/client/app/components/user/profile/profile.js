@@ -41,6 +41,16 @@
         };
         vm.fields = [
             {
+                key: 'email',
+                type: 'input',
+                templateOptions: {
+                    label: 'Email',
+                    placeholder: 'Email',
+                    required: true,
+                    type: 'text'
+                }
+            },
+            {
                 key: 'name',
                 type: 'input',
                 templateOptions: {
