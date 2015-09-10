@@ -33,12 +33,12 @@
         init();
 
         function init() {
-            vm.user = usersDataService.gettingUser();
+            usersDataService.gettingUser()
+                .then(function (user) {
+                    vm.user = user;
+                })
         }
 
-        vm.model = {
-            url: 'http://'
-        };
         vm.fields = [
             {
                 key: 'email',
@@ -98,7 +98,7 @@
         ];
 
         vm.submit = function () {
-            //do something
+            vm.user = usersDataService.updatingUser(vm.user.id, vm.user);
         }
     }
 })();

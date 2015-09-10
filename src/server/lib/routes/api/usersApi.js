@@ -64,6 +64,14 @@ router
     .get('/', function (req, res) {
         jwt.verify(req, res);
         return res.json(req.user);
+    })
+    .put('/', function (req, res) {
+        console.log('body', req.body);
+        user = req.body.user;
+        jwt.verify(req, res);
+        usersData.crud.updating(user._id, user).then(function (user) {
+            return res.json(user);
+        })
     });
 router.post('/sessions', function (req, res) {
     // LOGIN OF AN ALREADY REGISTERD USER
@@ -72,7 +80,9 @@ router.post('/sessions', function (req, res) {
             if (user) {
                 return jwt.generate(JSON.stringify(user), res);
             } else {
-                return res.status(401).send({error:"Invalid email or password"});
+                return res.status(401).send({
+                    error: "Invalid email or password"
+                });
             }
         })
         .fail(function (err) {
