@@ -57,7 +57,7 @@
                 id: id,
                 user: user
             }
-            return UserId.update(query);
+            return UserId.update(id, query).$promise;
         }
 
     }
