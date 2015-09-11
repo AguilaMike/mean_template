@@ -98,10 +98,7 @@
         ];
 
         vm.submit = function () {
-            usersDataService.updatingUser(vm.user.id, vm.user)
-                .then(function (user) {
-                    vm.user = user;
-                });
+            usersDataService.updatingUser(vm.user);
 
         }
     }

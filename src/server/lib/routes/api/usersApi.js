@@ -4,6 +4,7 @@ var usersData = require('../../data/usersData.js');
 var convert = require('../../convert.js');
 var logger = require('../../logger.js');
 var jwt = require('../../jwt.js');
+var ObjectID = require('mongodb').ObjectID;
 
 var router = express.Router({
     mergeParams: true
@@ -63,17 +64,12 @@ router
     })
     .get('/', function (req, res) {
         jwt.verify(req, res);
-        return res.json(req.user);
+        convert.prom2res(usersData.findingByEmail(req.user.email), res, 200);
     })
-    .put('/', function (req, res) {
-        user = req.body.user;
+    .put('/:id', function (req, res) {
         jwt.verify(req, res);
-        usersData.crud.updating(user._id, user).then(function (result) {
-            usersData.findingByEmail(user.email)
-                .then(function (user) {
-                    return user;
-                });
-        });
+        req.body._id = new ObjectID(req.body._id);
+        convert.prom2res(usersData.crud.updating(new ObjectID(req.params.id), req.body), res, 200);
     });
 
 router.post('/sessions', function (req, res) {

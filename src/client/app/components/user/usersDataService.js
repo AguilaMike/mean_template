@@ -6,8 +6,9 @@
 
     function usersDataService($resource, $q, $localStorage) {
 
-        var User = $resource('/api/users');
-        var UserId = $resource('/api/users/:id', null, {
+        var User = $resource('/api/users/:id', {
+            id: '@_id'
+        }, {
             'update': {
                 method: 'PUT'
             }
@@ -52,12 +53,8 @@
             return User.get().$promise;
         }
 
-        this.updatingUser = function (id, user) {
-            var query = {
-                id: id,
-                user: user
-            }
-            return UserId.update(id, query).$promise;
+        this.updatingUser = function (user) {
+            user.$update();
         }
 
     }

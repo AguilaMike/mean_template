@@ -1,4 +1,6 @@
 var logger = require('./logger.js');
+var ObjectID = require('mongodb').ObjectID;
+
 
 module.exports = {
     /** promise to response */
@@ -24,8 +26,7 @@ function promise2response(prom, res, statusOk) {
             if (err.code === 11000) {
                 logger.warn(err);
                 res.status(409).send(err);
-            }
-            else {
+            } else {
                 logger.error(err);
                 res.status(500).send(err);
             }
@@ -34,10 +35,10 @@ function promise2response(prom, res, statusOk) {
 
 function request2mongoq(req) {
     var mongoQuery = {}
-    // coll/:id
+        // coll/:id
     if (req.params.id) {
         mongoQuery.query = {};
-        mongoQuery.query._id = req.params.id;
+        mongoQuery.query._id = new ObjectID(req.params.id);
     }
     // coll/?search=text
     if (req.query.search) {

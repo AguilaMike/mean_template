@@ -4,9 +4,11 @@ var logger = require('../../logger.js');
 module.exports.crud = function (colname, sort, limit) {
     logger.debug("crud para " + colname);
     return {
-        _colName : colname,
-        _sort : sort || { _id: -1 },
-        _limit : limit || 100,
+        _colName: colname,
+        _sort: sort || {
+            _id: -1
+        },
+        _limit: limit || 100,
         finding: finding,
         inserting: inserting,
         updating: updating,
@@ -17,12 +19,20 @@ module.exports.crud = function (colname, sort, limit) {
 function finding(mongoQuery) {
     return mongodb.finding(this._colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit || this._limit, mongoQuery.sort || this._sort);
 }
+
 function inserting(document) {
     return mongodb.inserting(this._colName, document);
 }
-function updating(id,document) {
-     return mongodb.updating(this._colName, { _id: id }, document, null);
+
+function updating(id, document) {
+
+    return mongodb.updating(this._colName, {
+        _id: id
+    }, document, null);
 }
-function removing(id,document) {
-     return mongodb.removing(this._colName, { _id: id }, null);
+
+function removing(id, document) {
+    return mongodb.removing(this._colName, {
+        _id: id
+    }, null);
 }
