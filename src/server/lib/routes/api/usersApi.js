@@ -4,7 +4,7 @@ var usersData = require('../../data/usersData.js');
 var convert = require('../../convert.js');
 var logger = require('../../logger.js');
 var jwt = require('../../jwt.js');
-var ObjectID = require('mongodb').ObjectID;
+
 
 var router = express.Router({
     mergeParams: true
@@ -68,8 +68,7 @@ router
     })
     .put('/:id', function (req, res) {
         jwt.verify(req, res);
-        req.body._id = new ObjectID(req.body._id);
-        convert.prom2res(usersData.crud.updating(new ObjectID(req.params.id), req.body), res, 200);
+        convert.prom2res(usersData.crud.updating(req.params.id, req.body), res, 200);
     });
 
 router.post('/sessions', function (req, res) {
