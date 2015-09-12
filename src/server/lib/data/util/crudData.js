@@ -12,15 +12,15 @@ module.exports.crud = function (colname, sort, limit, oID) {
         },
         _limit: limit || 100,
         _oID: oID || true,
-        finding:finding,
+        finding: finding,
         inserting: inserting,
         updating: updating,
         removing: removing
     };
 }
 
-function finding(mongoQuery) {
-    return mongodb.finding(this._colName, forceId(mongoQuery.query, this._oID), null, mongoQuery.skip, mongoQuery.limit || this._limit, mongoQuery.sort || this._sort);
+function finding(mongoQ) {
+    return mongodb.finding(this._colName, forceId(mongoQ.query, this._oID), null, mongoQ.skip, mongoQ.limit || this._limit, mongoQ.sort || this._sort);
 }
 
 function inserting(document) {
@@ -28,24 +28,11 @@ function inserting(document) {
 }
 
 function updating(id, document) {
-    return mongodb.updating(this._colName, getId(id,this._oID), forceId(document,this._oID), null);
+    return mongodb.updating(this._colName, forceId({ _id: id }, this._oID), forceId(document, this._oID), null);
 }
 
 function removing(id, document) {
-    return mongodb.removing(this._colName,  getId(id,this._oID), null);
-}
-
-function getId(id,oID) {
-    if (oID) {
-        return {
-            _id: new ObjectID(id)
-        }
-    }
-    else {
-        return {
-            _id: id
-        }
-    }
+    return mongodb.removing(this._colName, forceId({ _id: id }, this._oID), null);
 }
 
 function forceId(document, oID) {
