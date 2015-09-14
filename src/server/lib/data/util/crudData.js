@@ -1,7 +1,9 @@
+var ObjectID = require('mongodb').ObjectID;
 var mongodb = require('./mongodb.js');
 var logger = require('../../logger.js');
 
-module.exports.crud = function (colname, sort, limit) {
+
+module.exports.crud = function (colname, sort, limit, oID) {
     logger.debug("crud para " + colname);
     return {
         _colName: colname,
@@ -9,6 +11,7 @@ module.exports.crud = function (colname, sort, limit) {
             _id: -1
         },
         _limit: limit || 100,
+        _oID: oID || true,
         finding: finding,
         inserting: inserting,
         updating: updating,
@@ -16,8 +19,8 @@ module.exports.crud = function (colname, sort, limit) {
     };
 }
 
-function finding(mongoQuery) {
-    return mongodb.finding(this._colName, mongoQuery.query, null, mongoQuery.skip, mongoQuery.limit || this._limit, mongoQuery.sort || this._sort);
+function finding(mongoQ) {
+    return mongodb.finding(this._colName, forceId(mongoQ.query, this._oID), null, mongoQ.skip, mongoQ.limit || this._limit, mongoQ.sort || this._sort);
 }
 
 function inserting(document) {
@@ -25,14 +28,16 @@ function inserting(document) {
 }
 
 function updating(id, document) {
-
-    return mongodb.updating(this._colName, {
-        _id: id
-    }, document, null);
+    return mongodb.updating(this._colName, forceId({ _id: id }, this._oID), forceId(document, this._oID), null);
 }
 
 function removing(id, document) {
-    return mongodb.removing(this._colName, {
-        _id: id
-    }, null);
+    return mongodb.removing(this._colName, forceId({ _id: id }, this._oID), null);
+}
+
+function forceId(document, oID) {
+    if (document._id && oID) {
+        document._id = new ObjectID(document._id);
+    }
+    return document;
 }

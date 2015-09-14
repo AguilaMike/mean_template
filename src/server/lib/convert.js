@@ -1,5 +1,5 @@
 var logger = require('./logger.js');
-var ObjectID = require('mongodb').ObjectID;
+//var ObjectID = require('mongodb').ObjectID;
 
 
 module.exports = {
@@ -35,10 +35,9 @@ function promise2response(prom, res, statusOk) {
 
 function request2mongoq(req) {
     var mongoQuery = {}
-        // coll/:id
+    // coll/:id
     if (req.params.id) {
-        mongoQuery.query = {};
-        mongoQuery.query._id = new ObjectID(req.params.id);
+        mongoQuery.query = { _id : req.params.id };
     }
     // coll/?search=text
     if (req.query.search) {

@@ -9,7 +9,10 @@ function crudRouter(router, data, schema) {
     var crud = data.crud;
     router
         .get('/', function (req, res) { convert.prom2res(crud.finding(convert.req2mongo(req)), res, 200); })
-        .get('/:id', function (req, res) { convert.prom2res(crud.finding(convert.req2mongo(req)), res, 200); })
+        .get('/:id', function (req, res) { 
+            var mongoQuery = convert.req2mongo(req);
+            var mongoPromise = crud.finding(mongoQuery);
+            convert.prom2res(mongoPromise, res, 200); })
         .post('/', function (req, res) {
             if (!schema || validator.validate(req.body, schema)) {
                 convert.prom2res(crud.inserting(req.body), res, 201);
