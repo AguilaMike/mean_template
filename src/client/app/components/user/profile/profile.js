@@ -1,7 +1,7 @@
 "use strict";
 (function () {
     angular
-        .module('profile', ['ui.router', 'formly', 'formlyBootstrap'])
+        .module('profile', ['ui.router', 'formly', 'formlyBootstrap', 'ngStorage'])
         .config(config)
         .directive('profile', directive)
 
@@ -27,7 +27,7 @@
         }
     }
 
-    function controller(usersDataService) {
+    function controller(usersDataService, $state, $localStorage) {
         var vm = this;
 
         init();
@@ -99,7 +99,12 @@
 
         vm.submit = function () {
             usersDataService.updatingUser(vm.user);
+        }
 
+        vm.deleteUser = function () {
+            usersDataService.deletingUser(vm.user);
+            delete $localStorage['xAccessToken'];
+            $state.go('dashboard');
         }
     }
 })();

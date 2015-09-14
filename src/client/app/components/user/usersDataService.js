@@ -57,6 +57,10 @@
             user.$update();
         }
 
+        this.deletingUser = function (user) {
+            user.$delete();
+        }
+
     }
 
 

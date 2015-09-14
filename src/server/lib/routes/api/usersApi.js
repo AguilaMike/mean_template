@@ -70,6 +70,11 @@ router
         jwt.verify(req, res);
         req.body._id = new ObjectID(req.body._id);
         convert.prom2res(usersData.crud.updating(new ObjectID(req.params.id), req.body), res, 200);
+    })
+    .delete('/:id', function (req, res) {
+        jwt.verify(req, res);
+        req.body._id = new ObjectID(req.body._id);
+        convert.prom2res(usersData.crud.removing(new ObjectID(req.params.id), req.body), res, 200);
     });
 
 router.post('/sessions', function (req, res) {
