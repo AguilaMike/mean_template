@@ -3,8 +3,7 @@ var MongoDB = require('winston-mongodb');
 var settings = require("./settings.js");
 var logger = null;
 
-/** configures the loggins system */
-module.exports = config();
+
 
 winston.emitErrs = true;
 
@@ -25,6 +24,8 @@ var mongoDb = {
 };
 
 
+/** configures the loggins system */
+module.exports = config();
 
 /** configures the log */
 function config() {
@@ -60,6 +61,7 @@ module.exports.morgan_stream = {
 			logger.info("express", meta);
 		} catch (err) {
 			logger.error("morgan_stream", err);
+			logger.warn("morgan_stream", message);
 		}
 	}
 };

@@ -1,6 +1,7 @@
 var colName = 'roles';
-var crudData = require('./util/crudData.js')
-    .crud(colName,
-        { _id: 1 });
+var crudData = require('./util/crudData.js');
 
-exports.crud = crudData;
+/** configures the generic data layer, with a collection name and default sorting by _id */
+var crud = crudData.crud(colName,{ _id: 1 });
+
+exports.crud = crud;

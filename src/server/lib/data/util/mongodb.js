@@ -9,7 +9,7 @@ var connection;
 module.exports = {
     /** connects to a database */
     connecting: connecting,
-    /** connection to a database */
+    /** the current database connection  */
     getConnection: getConnection,
 
     /** performs a find operation that returna an array*/
@@ -23,7 +23,9 @@ module.exports = {
     /** updates matched documents  */
     updating: updating,
     /** removes matched documents  */
-    removing: removing
+    removing: removing,
+    /** removes matched documents  */
+    counting: counting
 }
 
 function connecting() {
@@ -112,6 +114,16 @@ function removing(colName, query, options) {
         .remove(query, options || {
             safe: true
         }, function (err, result) {
+            convert.cllbck2prom(err, result, deferred);
+        });
+    return deferred.promise;
+}
+
+function counting(colName) {
+    logger.debug(colName + " counting : " + JSON.stringify(query));
+    var deferred = Q.defer();
+    connection.collection(colName)
+        .count(function (err, result) {
             convert.cllbck2prom(err, result, deferred);
         });
     return deferred.promise;

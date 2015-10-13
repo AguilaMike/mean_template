@@ -1,6 +1,6 @@
 var cache = require('../cache.js');
 
-/** routing for files fetched from fs */
+/** routing for files fetched from file system */
 module.exports.staticFileRoutes = function (app) {
     /** base route for index.html */
     app.get('/', function (req, res, next) {
