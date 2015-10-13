@@ -2,7 +2,13 @@ var winston = require('winston');
 var MongoDB = require('winston-mongodb');
 var settings = require("./settings.js");
 var logger = null;
+
+/** configures the loggins system */
+module.exports = config();
+
 winston.emitErrs = true;
+
+/** stream writer to console */
 var console = new winston.transports.Console({
 	level: 'debug',
 	handleExceptions: true,
@@ -10,30 +16,33 @@ var console = new winston.transports.Console({
 	colorize: true,
 	timestamp: true
 });
+
+/** stream writer to console */
 var mongoDb = {
 	db: settings.mongoUrl,
 	collection: 'logs',
 	storeHost: true
 };
-/** configures the loggins system */
-module.exports = config();
 
 
+
+/** configures the log */
 function config() {
 	if (!logger) {
 		logger = new winston.Logger({
 			transports: [console],
 			exitOnError: false
 		});
-	}
-	if (settings.mongoUrl) {
-		logger.add(winston.transports.MongoDB, mongoDb);
+		if (settings.mongoUrl) {
+			logger.add(winston.transports.MongoDB, mongoDb);
+		}
 	}
 	return logger;
 };
 
 /** json template for log entry objects */
 module.exports.morgan_json = '{"url": ":url" , "sts": :status, "rtm": :response-time, "cnt": ":res[content-length]" , "ipa": ":remote-addr"}';
+
 /** an input stream that receives events from morgan and sends them to winston  */
 module.exports.morgan_stream = {
 	write: function (message, encoding) {

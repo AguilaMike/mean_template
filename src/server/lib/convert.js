@@ -19,7 +19,7 @@ function promise2response(prom, res, statusOk) {
                 res.status(404).json();
             } else if (Array.isArray(result) && result.length <= 0) {
                 logger.debug("result: ", JSON.stringify(result));
-                res.status(204).json(result);
+                res.status(404).json(result);
              }
              else {
                 logger.debug("result: ", JSON.stringify(result));

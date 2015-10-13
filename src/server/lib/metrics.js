@@ -13,7 +13,7 @@ module.exports.sum = function (key, quantity) {
     saveMetric(key, quantity);
 };
 
-
+/** inserts or updates a metric key */
 function saveMetric(key, quantity) {
     var query = { _id: key };
     mongodb.finding(colName, query, null)
@@ -27,15 +27,14 @@ function saveMetric(key, quantity) {
 };
 /** creates a new entry for new event category */
 function newMetric(query, value) {
-    var updt = {
+    var metric = {
         _id: query._id,
         first: new Date(),
         last: new Date(),
         counter: 1,
         sum: value
     };
-    var opt = { upsert: true };
-    mongodb.updating(colName, query, updt, opt);
+    mongodb.inserting(colName,metric);
 }
 
 /** updates a metric for an existing event category */
