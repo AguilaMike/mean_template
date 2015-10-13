@@ -5,10 +5,11 @@
     "author": "Agora Binaria",
     "license": "ISC",
     "scripts": {
-        "prestart": "npm install && cd ../../src/client && npm install",
-        "start": "gulp build-dist && cd dist/server && npm install --production && node template.js"
+        "dev": "npm install && cd src/client && npm install && cd ../server && npm install && nodemon mean_template.js",
+        "pre": "npm install && cd src/client && npm install && gulp build-dist && cd dist/server && npm install --production && node mean_template.js"
     },
     "devDependencies": {
+        "nodemon": "^1.4.0",
         "del": "^1.2.0",
         "gulp": "^3.9.0",
         "gulp-if": "^1.2.5",

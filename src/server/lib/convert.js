@@ -1,7 +1,7 @@
 var logger = require('./logger.js');
-//var ObjectID = require('mongodb').ObjectID;
 
 
+/** conversion utitlity functions */
 module.exports = {
     /** promise to response */
     prom2res: promise2response,
@@ -10,14 +10,18 @@ module.exports = {
     /** takes callback parameters and returns a promise response */
     cllbck2prom: callback2Promise
 }
-
+/** gets a promise and returns a response with status */
 function promise2response(prom, res, statusOk) {
     prom
         .then(function response(result) {
-            if (typeof result == "undefined" || result == null || (Array.isArray(result) && result.length <= 0)) {
+            if (typeof result == "undefined" || result == null ) {
                 logger.warn("no result found ");
                 res.status(404).json();
-            } else {
+            } else if (Array.isArray(result) && result.length <= 0) {
+                logger.debug("result: ", JSON.stringify(result));
+                res.status(204).json(result);
+             }
+             else {
                 logger.debug("result: ", JSON.stringify(result));
                 res.status(statusOk).json(result);
             }
@@ -33,12 +37,16 @@ function promise2response(prom, res, statusOk) {
         });
 }
 
+
+/** given a request, parses its parameters and creates a mongodb query */
 function request2mongoq(req) {
     var mongoQuery = {}
+    
     // coll/:id
     if (req.params.id) {
         mongoQuery.query = { _id : req.params.id };
     }
+    
     // coll/?search=text
     if (req.query.search) {
         var regexOperator = {
@@ -60,6 +68,7 @@ function request2mongoq(req) {
             mongoQuery.sort[sortField] = sortField.substring("-") ? -1 : 1
         })
     }
+    
     // coll/?q=field:value
     if (req.query.q) {
         mongoQuery.query = {};
@@ -76,10 +85,11 @@ function request2mongoq(req) {
             mongoQuery.query[queryPairs[0]] = queryPairs[1];
         }
     }
+    
     return mongoQuery;
 }
 
-
+/** transforms a callback style code into a more readable promise */
 function callback2Promise(err, result, deferred) {
     if (err) {
         logger.error(err);

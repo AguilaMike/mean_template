@@ -1,11 +1,10 @@
 var morgan = require('morgan');
-var logger = require('./logger.js');
-var cache = require('./cache.js');
-var jwt = require('./jwt.js');
 var compression = require('compression');
 var multer = require('multer');
 var bodyParser = require('body-parser');
-
+var logger = require('./logger.js');
+var cache = require('./cache.js');
+var jwt = require('./jwt.js');
 
 
 /** configures a the logging system */
@@ -17,7 +16,7 @@ exports.useExpressLog = function expressLog(app) {
         "stream": logger.morgan_stream
     }));
     app.use(clientErrorHandler);
-
+    /** generic error handler */
     function clientErrorHandler(err, req, res, next) {
         logger.error(err.message, err.stack);
         if (req.xhr) {
@@ -54,7 +53,7 @@ exports.useBodyParser = function useBodyParser(app) {
         }));
         app.use(bodyParser.json());
     }
-    /** configures the security system for protected routes */
+/** configures the security system for protected routes */
 exports.useSecurity = function name(app) {
     app.use('/api/*/priv/', function (req, res, next) {
         jwt.verify(req, res, next);

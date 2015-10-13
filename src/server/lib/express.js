@@ -1,6 +1,6 @@
 "use strict";
 
-/** Creates the express application*/
+/** Creates and exports the express application*/
 exports.createApp = function () {
     var express = require('express');
     var middleware = require('./middleware.js');

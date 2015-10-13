@@ -7,7 +7,7 @@ var minifyHTML = require('gulp-minify-html');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 
-var src = '../../src/';
+var src = 'src/';
 var server = src + 'server/';
 var serverConfig = server + 'lib/';
 var serverFile = server + 'template.js';

@@ -1,9 +1,9 @@
-var logger = require('./logger.js');
-var metrics = require('./metrics.js');
 var cacheManager = require('cache-manager');
 var path = require('path');
 var fs = require("fs");
 var mime = require('mime');
+var logger = require('./logger.js');
+var metrics = require('./metrics.js');
 var settings = require('./settings.js');
 var minute = 60;
 var hour = minute * 60;
