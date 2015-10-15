@@ -1,29 +1,36 @@
 "use strict";
 (function () {
+    /** component state to show a dasboard  */
+    var componentName = "dashboard";
     angular
-        .module('dashboard', ['ui.router'])
-        .config(config)
-        .directive('dashboard', directive)
+        .module(componentName, ['ui.router'])
+        .config(stateConfig)
+        .directive(componentName, directive)
 
-    function config($stateProvider) {
+    /** declares a state for this component */
+    function stateConfig($stateProvider) {
         $stateProvider
-            .state('dashboard', {
+            .state(componentName, {
                 url: '/',
-                template: '<dashboard></dashboard>'
+                template: '<dashboard></dashboard>' // the directive that wraps the view and logic
             });
+        // there are no controllers linked to views anymore
+        // the directive will hold the logic in private controllers if needed
     }
 
+    
     function directive() {
         return {
-            templateUrl: 'app/components/dashboard/dashboard.html',
+            templateUrl: 'app/components/' + componentName + '/' + componentName + '.html',
             controller: controller,
-            controllerAs: "vm",
-            bindToController: true
+            controllerAs: componentName,
+            bindToController: true,
+            scope:{}
         }
     }
 
     function controller() {
         var vm = this;
-        vm.title = "the dashboard controller";
+        vm.title = "My great dashboard";
     }
 })();
