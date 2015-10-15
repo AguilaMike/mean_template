@@ -22,12 +22,14 @@ var distAssets = distClient + 'assets/';
 var distServer = dist + 'server/';
 var distServerConfig = distServer + 'lib/';
 
+/** delete distribution folder */
 gulp.task('del-dist', function () {
     del(dist, {
         force: true
     })
 });
 
+/** minifies, combines and copies the references used en index.html */
 gulp.task('parse-index', function () {
     var assets = useref.assets();
     return gulp.src(index)
@@ -39,6 +41,7 @@ gulp.task('parse-index', function () {
         .pipe(gulp.dest(distClient));
 });
 
+/** minifies and copies all html templates */
 gulp.task('move-html', function () {
     var opts = {
         empty: true
@@ -48,21 +51,25 @@ gulp.task('move-html', function () {
         .pipe(gulp.dest(distApp));
 });
 
+/** moves assets files */
 gulp.task('move-assets', function () {
     return gulp.src(assets + '/**/*.*')
         .pipe(gulp.dest(distAssets));
 });
 
+/** moves server files */
 gulp.task('move-server', function () {
     return gulp.src([serverFile, server + 'package.json'])
         .pipe(gulp.dest(distServer));
 });
 
+/** moves the configuration file */
 gulp.task('move-server-config', function () {
     return gulp.src(serverConfig + '/**/*.js')
         .pipe(gulp.dest(distServerConfig));
 });
 
+/** tasks to create a distribution folder */
 gulp.task('build-dist', ['parse-index', 'move-html', 'move-assets', 'move-server', 'move-server-config'], function () {
     console.log('Building distribution... Ready');
 })
