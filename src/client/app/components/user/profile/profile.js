@@ -3,7 +3,7 @@
     /** component state to view and edit the current user profile */
     var componentName = "profile";
     angular
-        .module('profile', ['ui.router', 'formly', 'formlyBootstrap', 'ngStorage'])
+        .module(componentName, ['ui.router', 'formly', 'formlyBootstrap', 'ngStorage'])
         .config(stateConfig)
         .directive(componentName, directive)
 

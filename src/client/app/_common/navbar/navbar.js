@@ -22,6 +22,7 @@
             return $state.is(state);
         }
         vm.logout = function () {
+            // TODO: crerate logout component and move the state to it
             delete $localStorage['xAccessToken'];
             $rootScope.isLogged = false;
             $state.go('dashboard');

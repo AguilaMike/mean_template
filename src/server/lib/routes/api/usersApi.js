@@ -46,7 +46,7 @@ router
     })
     .delete('/:id', function (req, res) {
         jwt.verify(req, res);
-        convert.prom2res(usersData.crud.removing(req.params.id, req.body), res, 200);
+        convert.prom2res(usersData.removing(req.params.id, req.body), res, 200);
         //convert.prom2res(usersData.crud.updating(req.params.id, req.body), res, 200);
     });
 
@@ -80,10 +80,10 @@ function registerNewUser(req, res) {
 function insertNewUser(req, res) {
     var user = req.body;
     logger.warn('crud: ' ,usersData.crud );
-    usersData.counting()
+    usersData.crud.counting()
         .then(function (count) {
             if (count == 0) user.role = "GOD";
-            usersData.inserting(user)
+            usersData.crud.inserting(user)
                 .then(function (user) {
                     return jwt.generate(JSON.stringify(user), res);
                 })
