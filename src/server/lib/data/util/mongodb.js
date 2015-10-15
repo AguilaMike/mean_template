@@ -120,7 +120,7 @@ function removing(colName, query, options) {
 }
 
 function counting(colName) {
-    logger.debug(colName + " counting : " + JSON.stringify(query));
+    logger.debug(colName + " counting : " + colName);
     var deferred = Q.defer();
     connection.collection(colName)
         .count(function (err, result) {

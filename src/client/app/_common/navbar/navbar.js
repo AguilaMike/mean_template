@@ -15,27 +15,22 @@
         }
     }
 
-    function controller($state, $localStorage) {
+    function controller($state, $localStorage, $rootScope) {
         var vm = this;
 
         vm.isActive = function (state) {
             return $state.is(state);
         }
-        vm.isLogged = false;
         vm.logout = function () {
             delete $localStorage['xAccessToken'];
-            vm.isLogged = false;
-            console.log(vm);
+            $rootScope.isLogged = false;
             $state.go('dashboard');
         }
 
         init();
 
         function init() {
-            if ($localStorage['xAccessToken'] != null) {
-                vm.isLogged = true;
-            }
-            console.log(vm);
+            $rootScope.isLogged = $localStorage['xAccessToken'] != null;
         }
     }
 })();

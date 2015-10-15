@@ -79,10 +79,11 @@ function registerNewUser(req, res) {
 
 function insertNewUser(req, res) {
     var user = req.body;
-    usersData.crud.counting()
+    logger.warn('crud: ' ,usersData.crud );
+    usersData.counting()
         .then(function (count) {
             if (count == 0) user.role = "GOD";
-            usersData.crud.inserting(user)
+            usersData.inserting(user)
                 .then(function (user) {
                     return jwt.generate(JSON.stringify(user), res);
                 })

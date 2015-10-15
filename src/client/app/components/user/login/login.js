@@ -39,7 +39,7 @@
                     .then(function (result) {
                         $state.go('profile');
                     }, function (err) {
-                        vm.form.token.$error.invalidtoken = true;
+                        vm.form.token.$error.notfound = true;
                     })
             }
         }

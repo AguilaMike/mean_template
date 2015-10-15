@@ -7,7 +7,7 @@
         .service(serviceName + 'Service', usersDataService)
 
     /** declares resources and exposes methods to wor with them */
-    function usersDataService($resource, $q, $localStorage) {
+    function usersDataService($resource, $q, $localStorage, $rootScope) {
 
         var User = $resource(
             '/api/users/:id',
@@ -64,11 +64,23 @@
         }
         /** ask delete the user object at the server */
         this.deletingUser = function (user) {
-            user.$delete();
+            user.$delete()
+                .then(function (response) {
+                    return deleteToken();
+                }, function (reason) {
+                    return $q.reject(reason);
+                });
         }
         /** saves the response token for later use in requests */
-        function saveToken(response){
+        function saveToken(response) {
             $localStorage.xAccessToken = response.token;
+            $rootScope.isLogged = true;
+            return response;
+        }
+        /** saves the response token for later use in requests */
+        function deleteToken(response) {
+            delete $localStorage['xAccessToken'];
+            $rootScope.isLogged = false;
             return response;
         }
     }

@@ -20,9 +20,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4 ng-class:{'has-error': login.form.token.$error.invalidtoken}">
+            <div class="form-group col-md-4 ng-class:{'has-error': login.form.token.$error.notfound}">
                 <input type="hidden" name="token" ng-model="login.token" class="form-control">
-                <div class="help-block has-error" ng-if="login.form.token.$error.invalidtoken">
+                <div class="help-block has-error" ng-if="login.form.token.$error.notfound">
                     <form-messages field="login.form.token"></form-messages>
                 </div>
             </div>

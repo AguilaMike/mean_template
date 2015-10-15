@@ -4,7 +4,6 @@ var logger = require('../../logger.js');
 
 /** factory that returns a generic crud implementations with mongo */
 module.exports.crud = function (colname, sort, limit, hasObjectId) {
-    logger.debug("crud para " + colname);
     /** object for perform basic crud actions in a collection */
     return {
         _colName: colname,

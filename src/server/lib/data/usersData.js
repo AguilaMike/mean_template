@@ -16,6 +16,15 @@ exports.findingByEmailPassword = function (email,password) {
     return mongodb.findingOne(colName, { email: email, password:password}, null);
 }
 
+/** counting documents*/
+exports.counting = function () {
+    return mongodb.counting(colName);
+}
+
+/** inserting documents*/
+exports.inserting = function (user) {
+    return mongodb.inserting(colName,user);
+}
 
 /** configures the generic data layer, with a collection name and default sorting by _id */
 var crud = crudData.crud(colName, { _id: 1 });

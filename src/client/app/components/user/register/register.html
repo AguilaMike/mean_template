@@ -20,9 +20,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4 ng-class:{'has-error': register.form.token.$error.invalidtoken}">
+            <div class="form-group col-md-4 ng-class:{'has-error': register.form.token.$error.conflict}">
                 <input type="hidden" name="token" ng-model="register.token" class="form-control">
-                <div class="help-block has-error" ng-if="register.form.token.$error.invalidtoken">
+                <div class="help-block has-error" ng-if="register.form.token.$error.conflict">
                     <form-messages field="register.form.token"></form-messages>
                 </div>
             </div>

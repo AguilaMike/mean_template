@@ -5,16 +5,16 @@
                 <li ng-class="{ active: navbar.isActive('dashboard') }">
                     <a ui-sref="dashboard">Dashboard</a>
                 </li>
-                <li ng-if="!navbar.isLogged" ng-class="{ active: navbar.isActive('login') }">
+                <li ng-if="!isLogged" ng-class="{ active: navbar.isActive('login') }">
                     <a ui-sref="login">Login</a>
                 </li>
-                <li ng-if="!navbar.isLogged" ng-class="{ active: navbar.isActive('register')}">
+                <li ng-if="!isLogged" ng-class="{ active: navbar.isActive('register')}">
                     <a ui-sref="register">Register</a>
                 </li>
-                <li ng-if="navbar.isLogged" ng-class="{active: navbar.isActive('profile')}">
+                <li ng-if="isLogged" ng-class="{active: navbar.isActive('profile')}">
                     <a ui-sref="profile">Profile</a>
                 </li>
-                <li ng-if="navbar.isLogged">
+                <li ng-if="isLogged">
                     <a href="#" ng-click="navbar.logout()">Logout</a>
                 </li>
             </ul>
