@@ -20,12 +20,11 @@
         vm.isActive = function (state) {
             return $state.is(state);
         }
-
         vm.logout = function () {
             delete $localStorage['xAccessToken'];
             vm.isLogged = false;
+            console.log(vm);
             $state.go('dashboard');
-
         }
 
         init();
@@ -35,8 +34,6 @@
                 vm.isLogged = true;
             }
             console.log(vm);
-
         }
-
     }
 })();

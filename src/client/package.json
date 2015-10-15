@@ -1,8 +1,8 @@
 {
   "name": "template",
   "version": "1.0.0",
-  "description": "mean_template dependencies",
-  "author": "Agora Binaria",
+  "description": "mean_template client side dependencies",
+  "author": "Academia Binaria",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.4.3",
