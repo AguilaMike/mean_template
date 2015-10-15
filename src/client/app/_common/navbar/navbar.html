@@ -2,20 +2,20 @@
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav navbar-nav">
-                <li ng-class="{ active: navCtrl.isActive('dashboard') }">
+                <li ng-class="{ active: navbar.isActive('dashboard') }">
                     <a ui-sref="dashboard">Dashboard</a>
                 </li>
-                <li ng-if="!navCtrl.isLogged" ng-class="{ active: navCtrl.isActive('login') }">
+                <li ng-if="!navbar.isLogged" ng-class="{ active: navbar.isActive('login') }">
                     <a ui-sref="login">Login</a>
                 </li>
-                <li ng-if="!navCtrl.isLogged" ng-class="{ active: navCtrl.isActive('register')}">
+                <li ng-if="!navbar.isLogged" ng-class="{ active: navbar.isActive('register')}">
                     <a ui-sref="register">Register</a>
                 </li>
-                <li ng-if="navCtrl.isLogged" ng-class="{active: navCtrl.isActive('profile')}">
+                <li ng-if="navbar.isLogged" ng-class="{active: navbar.isActive('profile')}">
                     <a ui-sref="profile">Profile</a>
                 </li>
-                <li ng-if="navCtrl.isLogged">
-                    <a href="#" ng-click="navCtrl.logout()">Logout</a>
+                <li ng-if="navbar.isLogged">
+                    <a href="#" ng-click="navbar.logout()">Logout</a>
                 </li>
             </ul>
         </div>

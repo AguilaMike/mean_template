@@ -1,14 +1,15 @@
 "use strict";
 (function () {
+    var componentName = "navbar";
     angular
-        .module('navbar', ['ui.router', 'ngStorage'])
-        .directive('navbar', directive)
+        .module(componentName, ['ui.router', 'ngStorage'])
+        .directive(componentName, directive)
 
     function directive() {
         return {
-            templateUrl: 'app/_common/navbar/navbar.html',
+            templateUrl: 'app/_common/' + componentName + '/' + componentName + '.html',
             controller: controller,
-            controllerAs: 'navCtrl',
+            controllerAs: componentName,
             bindToController: true
         }
     }

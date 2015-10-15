@@ -1,3 +1,6 @@
+.mainsection {
+    padding-top:50px;
+}
 [ui-view].ng-enter,
 [ui-view].ng-leave {
     position: absolute;
