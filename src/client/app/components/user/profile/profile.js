@@ -1,17 +1,19 @@
 "use strict";
 (function () {
+    /** component state to view and edit the current user profile */
+    var componentName = "profile";
     angular
         .module('profile', ['ui.router', 'formly', 'formlyBootstrap', 'ngStorage'])
-        .config(config)
-        .directive('profile', directive)
+        .config(stateConfig)
+        .directive(componentName, directive)
 
-    function config($stateProvider, formlyConfigProvider) {
+    function stateConfig($stateProvider, formlyConfigProvider) {
         $stateProvider
-            .state('profile', {
-                url: '/profile',
+            .state(componentName, {
+                url: '/'+componentName,
                 template: '<profile></profile>'
             });
-
+        
         formlyConfigProvider.setType({
             name: 'custom',
             templateUrl: 'custom.html'
@@ -20,9 +22,9 @@
 
     function directive() {
         return {
-            templateUrl: 'app/components/user/profile/profile.html',
+            templateUrl: 'app/components/user/' + componentName + '/' + componentName + '.html',
             controller: controller,
-            controllerAs: "vm",
+            controllerAs: componentName,
             bindToController: true
         }
     }
@@ -33,6 +35,7 @@
         init();
 
         function init() {
+            /** gets the current logged user */
             usersDataService.gettingUser()
                 .then(function (user) {
                     vm.user = user;

@@ -7,7 +7,7 @@
         .config(stateConfig)
         .directive(componentName, directive)
 
-    /** declares a state for this component */
+    /** declares a state for this component, it will handle the router logic also */
     function stateConfig($stateProvider) {
         $stateProvider
             .state(componentName, {

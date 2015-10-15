@@ -1,23 +1,26 @@
 "use strict";
 (function () {
+    /** component state to register a new user */
+    var componentName = "forgot-password";
+    var componentPascalName = "forgotPassword";
     angular
-        .module('forgotPassword', ['ui.router', 'form-messages'])
+        .module(componentName, ['ui.router', 'form-messages'])
         .config(config)
-        .directive('forgotPassword', directive)
+        .directive(componentPascalName, directive)
 
     function config($stateProvider) {
         $stateProvider
-            .state('forgotPassword', {
-                url: '/forgot-password',
+            .state(componentPascalName, {
+                url: '/'+componentName,
                 template: '<forgot-password></forgot-password>'
             });
     }
 
     function directive() {
         return {
-            templateUrl: 'app/components/user/forgot-password/forgot-password.html',
+            templateUrl: 'app/components/user/' + componentName + '/' + componentName + '.html',
             controller: controller,
-            controllerAs: "vm",
+            controllerAs: componentPascalName,
             bindToController: true
         }
     }
