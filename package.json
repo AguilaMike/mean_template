@@ -28,7 +28,7 @@
     },
     "license": "ISC",
     "scripts": {
-        "mongo" : "/Users/alberto/mongo/bin/mongod --dbpath /Users/alberto/mongo/bin/data --fork --logpath /dev/null",
+        "mongo" : "/Users/alberto/mongo/bin/mongod --dbpath /Users/alberto/mongo/data --fork --logpath /dev/null",
         "dev": "npm install && cd src/client && npm install && cd ../server && npm install && nodemon mean_template.js",
         "pro": "npm install && cd src/client && npm install && gulp build-dist && cd dist/server && npm install --production && node mean_template.js"
     },
