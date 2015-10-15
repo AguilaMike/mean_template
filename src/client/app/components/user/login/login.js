@@ -1,7 +1,7 @@
 "use strict";
 (function () {
     angular
-        .module('login', ['ui.router', 'formMessages'])
+        .module('login', ['ui.router', 'form-messages'])
         .config(config)
         .directive('login', directive)
 

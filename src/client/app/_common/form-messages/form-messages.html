@@ -1,9 +1,7 @@
 <div ng-messages="field.$error">
-    <div ng-message="required"><strong>This field is required.</strong>
-    </div>
-    <div ng-message="email"><strong>Please enter a valid email.</strong>
-    </div>
-    <div ng-message="minlength"><strong>Too short</strong></div>
-    <div ng-message="maxlength"><strong>Too long</strong></div>
-    <div ng-message="invalidtoken"><strong>Invalid token</strong></div>
+    <div class="err-message" ng-message="required">This field is required.</div>
+    <div class="err-message" ng-message="email">Please enter a valid email.</div>
+    <div class="err-message" ng-message="minlength">Too short</div>
+    <div class="err-message" ng-message="maxlength">Too long</div>
+    <div class="err-message" ng-message="invalidtoken">Invalid token</div>
 </div>

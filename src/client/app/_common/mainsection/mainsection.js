@@ -1,5 +1,6 @@
 "use strict";
 (function () {
+    /** main container to hold the views for each state */
     var componentName = "mainsection";
     angular
         .module(componentName, ['ngAnimate'])
@@ -7,7 +8,7 @@
 
     function directive() {
         return {
-            templateUrl: 'app/_common/' + componentName + '/' + componentName + '.html'
+            template: '<main class="container mainsection" ui-view></main>'
         }
     }
 })();

@@ -1,14 +1,16 @@
 "use strict";
 (function () {
+    /** shows validation messages for a field  */
+    var componentName = 'form-messages';
     angular
-        .module("formMessages", ['ngMessages'])
-        .directive("formMessages", directive)
+        .module(componentName, ['ngMessages'])
+        .directive('formMessages', directive)
 
     function directive() {
         return {
-            templateUrl: "app/_common/form-messages/form-messages.html",
+            templateUrl: 'app/_common/' + componentName + '/' + componentName + '.html',
             scope: {
-                field: "="
+                field: "=" // the field being validated
             }
         };
     }

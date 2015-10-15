@@ -1,5 +1,6 @@
 "use strict";
 (function () {
+    /** Navigation bar, and logic to control user state */
     var componentName = "navbar";
     angular
         .module(componentName, ['ui.router', 'ngStorage'])
@@ -17,10 +18,10 @@
     function controller($state, $localStorage) {
         var vm = this;
 
-        vm.isLogged = false;
         vm.isActive = function (state) {
             return $state.is(state);
         }
+        vm.isLogged = false;
         vm.logout = function () {
             delete $localStorage['xAccessToken'];
             vm.isLogged = false;

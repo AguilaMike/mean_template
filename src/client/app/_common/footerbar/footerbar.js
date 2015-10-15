@@ -1,5 +1,6 @@
 "use strict";
 (function () {
+    /** Footer bar */
     var componentName = "footerbar";
     angular
         .module(componentName, [])
@@ -7,7 +8,7 @@
 
     function directive() {
         return {
-            templateUrl: 'app/_common/' + componentName + '/' + componentName + '.html'
+            template: '<footer class="footerbar"><p>by <a href="http://agorabinaria.com/">Ágora Binaria</a> for <a href="http://academia-binaria.com/">Academia Binaria</a>.</p></footer>' 
         }
     }
 

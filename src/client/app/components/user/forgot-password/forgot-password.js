@@ -1,7 +1,7 @@
 "use strict";
 (function () {
     angular
-        .module('forgotPassword', ['ui.router', 'formMessages'])
+        .module('forgotPassword', ['ui.router', 'form-messages'])
         .config(config)
         .directive('forgotPassword', directive)
 
