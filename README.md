@@ -3,7 +3,7 @@
 Template project to create applications with **AngularJS**, **NodeJS**, **Express** and **MongoDB**. 
 
 
-Based on JavaScript ES5
+Based on JavaScript *ES5*
 
 Tecnologies used:
 ##Client side:
@@ -13,12 +13,14 @@ Tecnologies used:
 - ngMessages
 - ngAnimate
 - ui.router
-- ui.bootstrap
-- ui.grid
 - formly
 - ngStorage
-- gettext ??? angular-translate ???
-- module loader ??? webpack ????
+
+*To Do:*
+- ui.bootstrap
+- ui.grid
+- gettext 
+- module loader : webpack ???? jspm ????
 
 
 ##Server side:
@@ -32,3 +34,21 @@ Tecnologies used:
 - cache-manager
 - multer
 - compression
+
+
+##Instructions
+
+###Developer 
+- install latest node
+- git clone project
+- *sudo* npm run dev
+- open browser at http://localhost:3030
+
+###Production
+- install latest node
+- git clone project
+- *sudo* npm run pro
+
+
+## Scafolding
+(https://github.com/AcademiaBinaria/mean_template/blob/master/scafolding.md)
