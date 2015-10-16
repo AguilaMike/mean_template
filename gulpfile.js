@@ -1,3 +1,4 @@
+/** gulp and required plugins */
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var run = require('gulp-run');
@@ -7,6 +8,7 @@ var minifyHTML = require('gulp-minify-html');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 
+/** path related variables*/
 var src = 'src/';
 var server = src + 'server/';
 var serverConfig = server + 'lib/';
