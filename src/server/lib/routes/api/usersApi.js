@@ -58,7 +58,7 @@ router.post('/sessions', function (req, res) {
             checkNewSession(user, res);
         })
         .fail(function (err) {
-            resError(err, res);
+            convert.resError(err, res);
         });
 
 });
@@ -73,13 +73,12 @@ function registerNewUser(req, res) {
             }
         })
         .fail(function (err) {
-            resError(err, res);
+            convert.resError(err, res);
         });
 }
 
 function insertNewUser(req, res) {
     var user = req.body;
-    logger.warn('crud: ' ,usersData.crud );
     usersData.crud.counting()
         .then(function (count) {
             if (count == 0) user.role = "GOD";
@@ -88,11 +87,11 @@ function insertNewUser(req, res) {
                     return jwt.generate(JSON.stringify(user), res);
                 })
                 .fail(function (err) {
-                    resError(err, res);
+                    convert.resError(err, res);
                 });
         })
         .fail(function (err) {
-            resError(err, res);
+            convert.resError(err, res);
         });
 }
 
@@ -100,15 +99,10 @@ function checkNewSession(user, res) {
     if (user) {
         return jwt.generate(JSON.stringify(user), res);
     } else {
-        return res.status(401).send({
+        convert.resError({
             error: "Invalid email or password"
-        });
+        }, res,401);
     }
-}
-
-function resError(err, res) {
-    logger.error(err);
-    return res.status(500).send(err);
 }
 
 /** generic implementation of crud operations for other non managed routes */

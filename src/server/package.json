@@ -1,19 +1,9 @@
 {
-  "name": "mean_template",
+  "name": "mean_template_server",
   "version": "1.0.0",
-  "description": "mean template",
+  "description": "mean template server side",
   "main": "mean_template.js",
-  "author": "Agora Binaria <info@agorabinaria.com>",
-  "contributors": [
-    {
-      "name": "Mario Cordovilla",
-      "email": "mariocordovilla@agorabinaria.com"
-    },
-    {
-      "name": "Alberto Basalo",
-      "email": "albertobasalo@agorabinaria.com"
-    }
-  ],
+  "author": "Agora Binaria",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.12.2",

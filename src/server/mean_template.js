@@ -1,3 +1,4 @@
+/** start file */
 "use strict";
 
 var settings = require("./lib/settings.js");

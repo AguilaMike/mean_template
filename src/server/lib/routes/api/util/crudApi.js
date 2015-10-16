@@ -39,7 +39,7 @@ function postCrud(req, res, crud, schema) {
         convert.prom2res(promise, res, 201);
     }
     else {
-        resError(validator,res);
+        convert.resError(validator.getLastError(),res,400);
     }
 }
 
@@ -49,7 +49,7 @@ function putCrud(req, res, crud, schema) {
         convert.prom2res(promise, res, 200);
     }
     else {
-        resError(validator,res);
+        convert.resError(validator.getLastError(),res,400);
     }
 }
 
@@ -59,8 +59,3 @@ function deleteCrud(req, res, crud) {
 }
 
 
-/** utility to send an error when validation fails */
-function resError(validator , res) {
-    var error = validator.getLastError();
-    res.status(400).send(error);
-}
