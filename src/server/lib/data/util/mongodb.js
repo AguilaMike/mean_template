@@ -9,9 +9,10 @@ var connection;
 module.exports = {
     /** connects to a database */
     connecting: connecting,
-    /** the current database connection  */
+    /** gets the current database connection  */
     getConnection: getConnection,
- setConnection: setConnection,
+    /** saves the current database connection*/
+    setConnection: setConnection,
     /** performs a find operation that returna an array*/
     finding: finding,
     /** performs a find operation that returns an item*/
@@ -32,8 +33,6 @@ function connecting() {
     logger.debug("mongoDB connecting : " + JSON.stringify(settings.mongoUrl));
     var deferred = Q.defer();
     MongoClient.connect(settings.mongoUrl, function (err, db) {
-        /** stores the conection for reuse in next calls */
-        //connection = db;
         convert.cllbck2prom(err, db, deferred);
     });
     return deferred.promise;
