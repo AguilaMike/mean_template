@@ -9,7 +9,7 @@ module.exports = {
     req2mongo: request2mongoq,
     /** takes callback parameters and returns a promise response */
     cllbck2prom: callback2Promise,
-    /** logs and send error messages to clients */
+    /** logs and sends error messages to clients */
     resError : resError
 }
 /** gets a promise and returns a response with status */
@@ -102,7 +102,7 @@ function callback2Promise(err, result, deferred) {
     }
 }
 
-
+/** logs and sends error messages to clients */
 function resError(err, res, code){
     var status = code || 500;
     logger.error(err);

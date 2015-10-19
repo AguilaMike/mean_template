@@ -29,10 +29,7 @@
     function controller(movimientosDataService) {
         var vm = this;
         vm.title = "Mis movimientos";
-
-        vm.movimiento = movimientosDataService.newMovimiento();
-        vm.movimiento.tipo = "Ingreso";
-
+       
         vm.fields = [
             {
                 key: 'tipo',
@@ -77,14 +74,19 @@
             movimientosDataService
                 .insertingMovimiento(vm.movimiento)
                 .then(function () {
-                    vm.movimiento = movimientosDataService.newMovimiento();
-                    vm.movimiento.tipo = "Ingreso";
-                    vm.movimientos = movimientosDataService.getMovimientos();
+                    init();
                 });
         }
 
-        vm.movimientos = movimientosDataService.getMovimientos();
-
+        function init() {
+            vm.movimiento = movimientosDataService.newMovimiento();
+            vm.movimiento.tipo = "Ingreso";
+            vm.movimiento.fecha = new Date();
+            vm.movimiento.importe = 0;
+            vm.movimientos = movimientosDataService.getMovimientos();
+        }
+        
+        init();
     }
 
     function service($resource) {
