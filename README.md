@@ -41,6 +41,7 @@ Tecnologies used:
 ###Developer 
 - install latest node
 - git clone project
+- copy and rename settings.template.js to settings.js 
 - *sudo* npm run dev
 - open browser at http://localhost:3030
 
