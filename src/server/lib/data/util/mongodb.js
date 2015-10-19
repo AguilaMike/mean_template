@@ -11,7 +11,7 @@ module.exports = {
     connecting: connecting,
     /** the current database connection  */
     getConnection: getConnection,
-
+ setConnection: setConnection,
     /** performs a find operation that returna an array*/
     finding: finding,
     /** performs a find operation that returns an item*/
@@ -33,7 +33,7 @@ function connecting() {
     var deferred = Q.defer();
     MongoClient.connect(settings.mongoUrl, function (err, db) {
         /** stores the conection for reuse in next calls */
-        connection = db;
+        //connection = db;
         convert.cllbck2prom(err, db, deferred);
     });
     return deferred.promise;
@@ -43,6 +43,9 @@ function getConnection() {
     return connection;
 }
 
+function setConnection(db) {
+    connection=db;
+}
 function finding(colName, query, proj, skip, limit, sort) {
     logger.debug(colName + " finding : " + JSON.stringify(query));
     var _skip = skip || 0;
@@ -81,6 +84,7 @@ function findingOne(colName, query, projection) {
     }
     return deferred.promise;
 }
+
 
 function aggregating(colName, query) {
     var deferred = Q.defer();

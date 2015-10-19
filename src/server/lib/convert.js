@@ -67,7 +67,8 @@ function request2mongoq(req) {
         mongoQuery.sort = {};
         var sortFields = req.query.sort.split(":");
         sortFields.forEach(function (sortField) {
-            mongoQuery.sort[sortField] = sortField.substring("-") ? -1 : 1
+            var filedName =sortField.substring("-");
+            mongoQuery.sort[filedName] = sortField.indexOf("-") <0 ? 1 : -1
         })
     }
     

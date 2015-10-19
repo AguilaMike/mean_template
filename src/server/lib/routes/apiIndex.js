@@ -4,4 +4,5 @@ var express = require('express');
 module.exports.apiRoutes = function (app) {
     app.use('/api/roles', require('./api/rolesApi.js'));
     app.use('/api/users', require('./api/usersApi.js'));
+    app.use('/api/movimientos', require('./api/movimientosApi.js'));
 }
