@@ -18,7 +18,7 @@ function saveMetric(key, quantity) {
     var query = { _id: key };
     mongodb.finding(colName, query, null)
         .then(function (item) {
-            if (!item) {
+            if (!item || item.length==0) {
                 newMetric(query, quantity);
             } else {
                 updateMetric(query, quantity);
@@ -45,3 +45,18 @@ function updateMetric(query, value) {
     };
     mongodb.updating(colName, query, updt, null);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
