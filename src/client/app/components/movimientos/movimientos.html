@@ -1,18 +1,19 @@
-<h1>Movimientos</h1>
 <h2>{{ movimientos.title }}</h2>
-<p>Mantinimiento de movimientos...</p>
+<p>Mantenimiento de movimientos...</p>
 
 
 <div class="container row">
     <form 
-       name="movimientos.form" 
-       ng-submit="movimientos.submit()" novalidate>
+       novalidate>
         <formly-form 
             model="movimientos.movimiento" 
             fields="movimientos.fields">
         </formly-form>
         <div class="row">
-            <button type="submit" class="btn btn-default">Save</button>
+            <button class="btn btn-default" 
+            ng-click="movimientos.guardarMovimiento()" >Guardar Movimiento</button>
         </div>
     </form>
 </div>
+{{movimientos.movimientos}}
+
