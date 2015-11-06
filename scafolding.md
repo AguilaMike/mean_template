@@ -1,8 +1,8 @@
-- # 0 package.json
-+ # 1 client/
-	- ## 1.0 package.json
-    - ## 1.1 index.html
-	+ ## 1.2 app/
+- #0 package.json
++ #1 client/
+	- ##1.0 package.json
+    - ##1.1 index.html
+	+## 1.2 app/
 		+ ### 1.2.1 common/
 		    - #### 1.2.1.1 app.js
 			- #### 1.2.1.2 security.js
