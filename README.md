@@ -44,7 +44,7 @@ Tecnologies used:
 - copy and rename settings.template.js to settings.js 
 - start default mongodb or `npm run mongo`
 - `*sudo* npm run dev`
-- open browser at [](http://localhost:3030)
+- open browser at [http://localhost:3030](http://localhost:3030)
 
 ###Production
 - install latest node
@@ -53,4 +53,4 @@ Tecnologies used:
 
 
 ## Scafolding
-[](https://github.com/AcademiaBinaria/mean_template/blob/master/scafolding.md)
+[Scafolding](https://github.com/AcademiaBinaria/mean_template/blob/master/scafolding.md)
