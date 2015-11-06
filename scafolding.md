@@ -1,21 +1,23 @@
-- #0 package.json
-+ #1 client/
-	- ##1.0 package.json
-    - ##1.1 index.html
-	+ ##1.2 app/
-		+ ###1.2.1 _common/
-		    - ####1.2.1.1 app.js
-			+ ####1.2.1.2 navbar/
-			    - #####1.2.1.2.1 navbar.html
-				- #####1.2.1.2.2 navbar.js
-		+ ###1.2.2 components/
-		    + ####1.2.2.1 dashboard/
-			+ ####1.2.2.2 user/
-			    - #####1.2.2.2.1 user.js
-				- #####1.2.2.2.2 userDataService.js
-				+ #####1.2.2.2.3 login/
-				    - ######1.2.2.2.3.1 login.html
-				    - ######1.2.2.2.3.2 login.js
+- # 0 package.json
++ # 1 client/
+	- ## 1.0 package.json
+    - ## 1.1 index.html
+	+ ## 1.2 app/
+		+ ### 1.2.1 common/
+		    - #### 1.2.1.1 app.js
+			- #### 1.2.1.2 security.js
+		+ ### 1.2.2 components/
+			+ #### 1.2.2.1 navbar/
+			    - ##### 1.2.2.1.1 navbar.html
+				- ##### 1.2.2.1.2 navbar.js
+		+ ### 1.2.3 states/
+		    + #### 1.2.3.1 dashboard/
+			+ #### 1.2.3.2 user/
+			    - ##### 1.2.3.2.1 user.js
+				- ##### 1.2.3.2.2 userDataService.js
+				+ ##### 1.2.3.2.3 login/
+				    - ###### 1.2.3.2.3.1 login.html
+				    - ###### 1.2.3.2.3.2 login.js
 + #2 server/
 	- ##2.0 package.json
     - ##2.1 mean_template.js
