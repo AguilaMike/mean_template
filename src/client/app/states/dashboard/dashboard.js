@@ -1,16 +1,16 @@
 "use strict";
 (function () {
 	/** component state to show a dasboard  */
-	var componentName = "dashboard";
+	var stateName = "dashboard";
 	angular
-		.module(componentName, ['ui.router'])
+		.module(stateName, ['ui.router'])
 		.config(stateConfig)
-		.directive(componentName, directive)
+		.directive(stateName, directive)
 
 	/** declares a state for this component, it will handle the router logic also */
 	function stateConfig($stateProvider) {
 		$stateProvider
-			.state(componentName, {
+			.state(stateName, {
 				url: '/',
 				template: '<dashboard></dashboard>' // the directive that wraps the view and logic
 			});
@@ -21,9 +21,9 @@
 
 	function directive() {
 		return {
-			templateUrl: 'app/states/' + componentName + '/' + componentName + '.html',
+			templateUrl: 'app/states/' + stateName + '/' + stateName + '.html',
 			controller: controller,
-			controllerAs: componentName,
+			controllerAs: stateName,
 			bindToController: true,
 			scope: {}
 		}

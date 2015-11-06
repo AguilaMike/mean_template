@@ -1,16 +1,16 @@
 "use strict";
 (function () {
-	var componentName = "movimientos";
+	var stateName = "movimientos";
 	angular
-		.module(componentName, ['ui.router', 'formly', 'formlyBootstrap', 'ngResource'])
+		.module(stateName, ['ui.router', 'formly', 'formlyBootstrap', 'ngResource'])
 		.config(stateConfig)
-		.directive(componentName, directive)
-		.service(componentName + "DataService", service)
+		.directive(stateName, directive)
+		.service(stateName + "DataService", service)
 
 	function stateConfig($stateProvider) {
 		$stateProvider
-			.state(componentName, {
-				url: '/' + componentName,
+			.state(stateName, {
+				url: '/' + stateName,
 				template: '<movimientos></movimientos>'
 			});
 	}
@@ -18,9 +18,9 @@
 
 	function directive() {
 		return {
-			templateUrl: 'app/states/' + componentName + '/' + componentName + '.html',
+			templateUrl: 'app/states/' + stateName + '/' + stateName + '.html',
 			controller: controller,
-			controllerAs: componentName,
+			controllerAs: stateName,
 			bindToController: true,
 			scope: {}
 		}
@@ -83,7 +83,7 @@
 			vm.movimiento.tipo = "Ingreso";
 			vm.movimiento.fecha = new Date();
 			vm.movimiento.importe = 0;
-			vm.movimientos = movimientosDataService.getMovimientos();
+			vm.movimientos = movimientosDataService.gettingMovimientos();
 		}
 
 		init();
@@ -107,7 +107,7 @@
 			return movimiento.$save();
 		}
 
-		this.getMovimientos = function () {
+		this.gettingMovimientos = function () {
 			return Movimiento.query();
 		}
 	}
