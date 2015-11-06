@@ -40,16 +40,17 @@ Tecnologies used:
 
 ###Developer 
 - install latest node
-- git clone project
+- `git clone mean_template`
 - copy and rename settings.template.js to settings.js 
-- *sudo* npm run dev
-- open browser at http://localhost:3030
+- start default mongodb or `npm run mongo`
+- `*sudo* npm run dev`
+- open browser at [](http://localhost:3030)
 
 ###Production
 - install latest node
-- git clone project
-- *sudo* npm run pro
+- `git clone mean_template`
+- `*sudo* npm run pro`
 
 
 ## Scafolding
-(https://github.com/AcademiaBinaria/mean_template/blob/master/scafolding.md)
+[](https://github.com/AcademiaBinaria/mean_template/blob/master/scafolding.md)
