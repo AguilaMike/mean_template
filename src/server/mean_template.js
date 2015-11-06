@@ -7,7 +7,7 @@ var logger = require("./lib/logger.js");
 
 /** in a MEAN app, we have to ensure there is a MongoDB  */
 mongodb.connecting().then(function (db) {
-    mongodb.setConnection(db);
+	mongodb.setConnection(db);
 	logger.info('ready... MongoDB ok', settings);
 	var metrics = require("./lib/metrics.js");
 	metrics.count(settings.name + ".start");
@@ -17,5 +17,6 @@ mongodb.connecting().then(function (db) {
 	var server = app.listen(settings.port, function () {
 		logger.warn('go... listening on port: ' + server.address().port);
 	});
-}).fail(function (err) { console.error(err) });
-
+}).fail(function (err) {
+	console.error(err);
+});
