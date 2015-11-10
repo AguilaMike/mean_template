@@ -3,19 +3,24 @@
 	/** Navigation bar, and logic to control user state */
 	var componentName = "navbar";
 	angular
-		.module(componentName, ['ui.router', 'ngStorage'])
+		.module(componentName, ['ui.router','navbarCtrl'])
 		.directive(componentName, directive)
 
 	function directive() {
 		return {
 			templateUrl: 'app/components/' + componentName + '/' + componentName + '.html',
-			controller: controller,
+			controller: "navbarCtrl",
 			controllerAs: componentName,
 			bindToController: true
 		}
 	}
+})();
 
-	function controller($state, $localStorage, $rootScope) {
+(function () {
+	angular
+		.module('navbarCtrl',['ui.router', 'ngStorage'])
+        .controller("navbarCtrl", controller);
+    function controller($state, $localStorage, $rootScope) {
 		var vm = this;
 
 		vm.isActive = function (state) {
@@ -34,3 +39,4 @@
 		}
 	}
 })();
+

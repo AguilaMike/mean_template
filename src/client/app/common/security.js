@@ -2,7 +2,7 @@
 (function () {
     /** configures the current module with http interceptors to implement client side security logic*/
     angular
-        .module(moduleName)
+        .module("security",['ui.router','ngStorage'])
         .config(interceptorsConfiguration);
 
     /** interceptors configuration function */
