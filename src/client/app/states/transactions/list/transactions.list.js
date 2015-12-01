@@ -14,7 +14,6 @@
 			});
 	}
 
-
 	function directive() {
 		return {
 			templateUrl: 'app/states/transactions/list/transactions.list.html',
