@@ -11,7 +11,7 @@ var jwt = require('./jwt.js');
 exports.useExpressLog = function expressLog(app) {
     app.use(morgan(logger.morgan_json, {
         "skip": function (req, res) {
-            return false; //res.statusCode < 100
+            return false; //res.statusCode < 400
         },
         "stream": logger.morgan_stream
     }));
@@ -48,11 +48,11 @@ exports.useUploader = function uploader(app) {
 };
 /** parses body and urls to get JSON objects */
 exports.useBodyParser = function useBodyParser(app) {
-        app.use(bodyParser.urlencoded({
-            extended: true
-        }));
-        app.use(bodyParser.json());
-    }
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(bodyParser.json());
+}
 /** configures the security system for protected routes */
 exports.useSecurity = function name(app) {
     app.use('/api/*/priv/', function (req, res, next) {

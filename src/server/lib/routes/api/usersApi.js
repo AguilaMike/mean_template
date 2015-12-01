@@ -38,6 +38,7 @@ router
     })
     .get('/', function (req, res) {
         jwt.verify(req, res);
+        // gets the current logged user
         convert.prom2res(usersData.findingByEmail(req.user.email), res, 200);
     })
     .put('/:id', function (req, res) {
@@ -81,7 +82,10 @@ function insertNewUser(req, res) {
     var user = req.body;
     usersData.crud.counting()
         .then(function (count) {
-            if (count == 0) user.role = "GOD";
+            if (count == 0)
+                user.role = "GOD";
+            else
+                user.role = "USER";
             usersData.crud.inserting(user)
                 .then(function (user) {
                     return jwt.generate(JSON.stringify(user), res);
@@ -101,11 +105,11 @@ function checkNewSession(user, res) {
     } else {
         convert.resError({
             error: "Invalid email or password"
-        }, res,401);
+        }, res, 401);
     }
 }
 
-/** generic implementation of crud operations for other non managed routes */
+/** generic implementation of crud operations for other non custom managed routes */
 crudApi(router, usersData, schema);
 
 

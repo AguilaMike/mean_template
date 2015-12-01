@@ -3,29 +3,47 @@ var logger = require('./logger.js');
 
 /** conversion utitlity functions */
 module.exports = {
-		/** promise to response */
-		prom2res: promise2response,
-		/** request to mongo query */
-		req2mongo: request2mongoq,
-		/** takes callback parameters and returns a promise response */
-		cllbck2prom: callback2Promise,
-		/** logs and sends error messages to clients */
-		resError: resError
-	}
-	/** gets a promise and returns a response with status */
+	/** promise to response */
+	prom2res: promise2response,
+	/** request to mongo query */
+	req2mongo: request2mongoq,
+	/** takes callback parameters and returns a promise response */
+	cllbck2prom: callback2Promise,
+	/** logs and sends error messages to clients */
+	resError: resError
+}
+
+/** gets a promise and returns a response with status */
 function promise2response(prom, res, statusOk, single) {
 	prom
 		.then(function response(result) {
 			if (typeof result == "undefined" || result == null) {
 				logger.warn("no result found ");
 				res.status(404).json();
-			} else if (Array.isArray(result) && result.length <= 0) {
-				logger.debug("result: ", JSON.stringify(result));
-				res.status(404).json(result);
 			} else {
-				if (single && Array.isArray(result) && result.length > 0) result = result[0];
-				logger.debug("result: ", JSON.stringify(result));
-				res.status(statusOk).json(result);
+				if (single) {
+					if (Array.isArray(result)) {
+						if (result.length == 0) {
+							logger.warn("no result found ");
+							res.status(404).json();
+						} else {
+							logger.debug("result: ", JSON.stringify(result[0]));
+							res.status(statusOk).json(result[0]);
+						}
+					} else {
+						logger.debug("result: ", JSON.stringify(result));
+						res.status(statusOk).json(result);
+					}
+				}
+				else {
+					if (Array.isArray(result) && result.length <= 0) {
+						logger.debug("result: ", JSON.stringify(result));
+						res.status(204).json(result);
+					} else {
+						logger.debug("result: ", JSON.stringify(result));
+						res.status(statusOk).json(result);
+					}
+				}
 			}
 		})
 		.fail(function error(err) {

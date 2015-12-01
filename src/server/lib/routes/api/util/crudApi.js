@@ -5,7 +5,7 @@ var validator = new ZSchema({});
 
 module.exports = crudRouter;
 
-/** a geeneric router for CRUD operations */
+/** a generic router for CRUD operations */
 function crudRouter(router, data, schema) {
 	var crud = data.crud;
 	router

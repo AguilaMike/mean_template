@@ -16,7 +16,7 @@ var console = new winston.transports.Console({
 	timestamp: true
 });
 
-/** stream writer to console */
+/** stream writer to MongoDB */
 var mongoDb = {
 	db: settings.mongoUrl,
 	collection: 'logs',
@@ -24,7 +24,7 @@ var mongoDb = {
 };
 
 
-/** configures the loggins system */
+/** configures the loggin system */
 module.exports = config();
 
 /** configures the log */
