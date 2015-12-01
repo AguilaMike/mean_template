@@ -2,14 +2,18 @@
 (function () {
 	var stateName = 'viewTransaction';
 	angular
-		.module(stateName, ['ui.router', 'formly', 'editTransaction','formlyBootstrap', 'transactionsDataService'])
+		.module(stateName, ['ui.router', 'editTransaction'])
 		.config(stateConfig)
 
 	function stateConfig($stateProvider) {
 		$stateProvider
 			.state(stateName, {
 				url: '/transactions/view/:id',
-				template: '<edit-transaction></edit-transaction>'
+				template: '{{vm.transactionId}}<edit-transaction transactionid="vm.transactionId"></edit-transaction>',
+				controllerAs: 'vm',
+				controller: function ($stateParams) {
+					this.transactionId = $stateParams.id;
+				}
 			});
 	}
 

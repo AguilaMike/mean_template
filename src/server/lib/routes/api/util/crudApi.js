@@ -18,6 +18,9 @@ function crudRouter(router, data, schema) {
 		.post('/', function (req, res) {
 			postCrud(req, res, crud, schema);
 		})
+		.post('/:id', function (req, res) {
+			putCrud(req, res, crud, schema);
+		})
 		.put('/:id', function (req, res) {
 			putCrud(req, res, crud, schema);
 		})

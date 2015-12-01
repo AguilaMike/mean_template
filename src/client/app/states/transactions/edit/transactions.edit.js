@@ -4,7 +4,6 @@
 	angular
 		.module(componentName, ['ui.router', 'formly', 'formlyBootstrap', 'transactionsDataService'])
 		.directive(componentName, directive)
-//<edit-transaction></edit-transaction>
 
 	function directive() {
 		return {
@@ -12,7 +11,9 @@
 			controller: controller,
 			controllerAs: componentName,
 			bindToController: true,
-			scope: {}
+			scope: {
+				transactionid: "="
+			}
 		}
 	}
 
@@ -61,32 +62,37 @@
         ]
 
 		vm.editTransaction = function () {
-            if(true){
-                transactionsDataService
-                    .saving(vm.transaction)
-                    .then(function () {
-                        $state.go('listTransactions');
-                    });
-            }
-            else{
-                transactionsDataService
-                    .updating(vm.transaction)
-                    .then(function () {
-                        $state.go('listTransactions');
-                    });
-            }
+			if (true) {
+				transactionsDataService
+					.saving(vm.transaction)
+					.then(function () {
+						$state.go('listTransactions');
+					});
+			} else {
+				transactionsDataService
+					.updating(vm.transaction)
+					.then(function () {
+						$state.go('listTransactions');
+					});
+			}
 		}
-        
-        function init() {
-            if(true){
-                vm.transaction = transactionsDataService.new();
-                vm.transaction.type = "Income";
-                vm.transaction.date = new Date();
-                vm.transaction.amount = 0;
-            }
-            else{
-                
-            }
+
+		function init() {
+			if (vm.transactionid) {
+				transactionsDataService.getting(vm.transactionid)
+					.$promise.then(function (data) {
+						var milliseconds = Date.parse(data.date)
+						if (!isNaN(milliseconds)) {
+							data.date = new Date(milliseconds);
+						}
+						vm.transaction = data;
+					});
+			} else {
+				vm.transaction = transactionsDataService.new();
+				vm.transaction.type = "Income";
+				vm.transaction.date = new Date();
+				vm.transaction.amount = 0;
+			}
 		}
 
 		init();
