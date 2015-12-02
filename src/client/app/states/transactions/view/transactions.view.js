@@ -9,8 +9,8 @@
 		$stateProvider
 			.state(stateName, {
 				url: '/transactions/view/:id',
-				template: '{{vm.transactionId}}<edit-transaction transactionid="vm.transactionId"></edit-transaction>',
-				controllerAs: 'vm',
+				template: '<edit-transaction transactionid="viewTransaction.transactionId"></edit-transaction>',
+				controllerAs: 'viewTransaction',
 				controller: function ($stateParams) {
 					this.transactionId = $stateParams.id;
 				}
